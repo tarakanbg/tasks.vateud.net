@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  author_id: 1
+  name: MyString
+  description: MyText
+  priority_id: 1
+  due_date: 2013-05-11 14:54:45
+  status_id: 1
+  active: false
+
+two:
+  author_id: 1
+  name: MyString
+  description: MyText
+  priority_id: 1
+  due_date: 2013-05-11 14:54:45
+  status_id: 1
+  active: false

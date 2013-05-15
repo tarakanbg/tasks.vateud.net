@@ -1,0 +1,25 @@
+%table#exams.table.table-striped
+  %thead
+    %tr
+      %th= link_to "ID", {:controller => "tasks", :sort => "id"}
+      %th= link_to "Name", {:controller => "tasks", :sort => "name"}
+      %th Priority
+      %th Due Date
+      %th Status
+
+  %tbody
+    - @tasks.each do |task|
+      %tr
+        %td= task.id
+        %td= task.name
+        %td= task.priority_id
+        %td= task.due_date
+        %td= task.status_id
+        %td
+          = link_to "Edit", edit_task_path(task), :class => 'btn btn-mini'
+          = link_to "Delete", task_path(task), :method => :delete, :confirm => "Are you sure?", :class => 'btn btn-mini btn-danger'
+
+= will_paginate @collection
+
+= link_to "New Task", new_task_path, :class => 'btn btn-primary'
+/ = render :partial => "search_form"

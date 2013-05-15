@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  priority: 1
+  css: MyString
+
+two:
+  name: MyString
+  priority: 1
+  css: MyString
