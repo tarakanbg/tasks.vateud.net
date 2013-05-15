@@ -46,3 +46,8 @@ gem "rails_admin", "~> 0.4.7"
 
 gem "devise"
 gem "paper_trail", "~> 2.7.1"
+
+gem "simple_form", "~> 2.1.0"
+gem "will_paginate", "~> 3.0.4"
+gem "bootstrap-will_paginate", "~> 0.0.9"
+gem "meta_search", "~> 1.1.3"
