@@ -19,7 +19,7 @@ class TasksController < ApplicationController
   # GET /tasks/1.json
   def show
     @task = Task.find(params[:id])
-    @pagetitle = "Task details ##{@task.id}"
+    @pagetitle = "Task details: #{@task.name}"
 
     respond_to do |format|
       format.html # show.html.erb
@@ -43,7 +43,7 @@ class TasksController < ApplicationController
   # GET /tasks/1/edit
   def edit    
     @task = Task.find(params[:id])
-    @pagetitle = "Edit Task ##{@task.id}"
+    @pagetitle = "Edit Task: #{@task.name}"
   end
 
   # POST /tasks

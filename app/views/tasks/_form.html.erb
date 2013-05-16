@@ -5,9 +5,20 @@
     <%= f.association :author, label_method: :name, value_method: :id, include_blank: false %>
     <%= f.input :name %>
     <%= f.input :description %>
-    <%= f.input :due_date %>
-    <%= f.input :status_id %>
+    <div class="control-group string optional">
+      <label class="string optional control-label">Due date</label>
+      <div>
+        <div class="controls">
+          <div class="datepicker input-append date" id="dp3" data-date="<%= @task.due_date %>" data-date-format="yyyy-mm-dd">
+
+            <input class="span3" size="16" type="text" id="task_due_date" name="task[due_date]" value="<%= @task.due_date %>">
+            <span class="add-on"><i class="icon-th"></i></span>
+          </div>
+        </div>
+      </div>
+    <%= f.association :status %>
     <%= f.input :active %>
+
   </div>
 
   <div class="form-actions">
