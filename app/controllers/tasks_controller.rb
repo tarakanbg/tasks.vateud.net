@@ -2,12 +2,22 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    @pagetitle = "Tasks"
-    # @tasks = Task.all
-
     ord = get_order(params[:sort])
-    @search = Task.search(params[:search])
-    @tasks = @search.paginate(:page => params[:page], :per_page => 10).order(ord)
+    if params[:my] && params[:my] == "true"
+      @search = current_user.tasks.roots
+      @pagetitle = "Tasks for user #{current_user.name}"
+    else
+      @search = Task.roots
+      @pagetitle = "VATEUD Active Tasks"
+    end
+    if params[:archived] && params[:archived] == "true"
+      @search = @search.inactive
+      @pagetitle = "VATEUD Archived Tasks"
+    else
+      @search = @search.active
+    end
+    @search = Task.search(params[:search]) if params[:search]
+    @tasks = @search.paginate(:page => params[:page], :per_page => 20).order(ord)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -33,6 +43,9 @@ class TasksController < ApplicationController
     @pagetitle = "New Task"
     @task = Task.new
     @task.author_id = current_user.id
+    @task.status_id = 1
+    @task.due_date = Date.today + 1.week
+    @task.parent_id = params[:parent_id] if params[:parent_id]
 
     respond_to do |format|
       format.html # new.html.erb
@@ -88,6 +101,46 @@ class TasksController < ApplicationController
       format.html { redirect_to tasks_url }
       format.json { head :no_content }
     end
+  end
+
+  def accept
+    @task = Task.find(params[:id])
+    @task.status_id = 2
+    @task.active = true
+    @task.save
+    redirect_to :back
+  rescue ActionController::RedirectBackError
+    redirect_to root_path
+  end
+
+  def cancel
+    @task = Task.find(params[:id])
+    @task.status_id = 6
+    @task.active = false
+    @task.save
+    redirect_to :back
+  rescue ActionController::RedirectBackError
+    redirect_to root_path
+  end
+
+  def progress
+    @task = Task.find(params[:id])
+    @task.status_id = 3
+    @task.active = true
+    @task.save
+    redirect_to :back
+  rescue ActionController::RedirectBackError
+    redirect_to root_path
+  end
+
+  def halt
+    @task = Task.find(params[:id])
+    @task.status_id = 5
+    @task.active = true
+    @task.save
+    redirect_to :back
+  rescue ActionController::RedirectBackError
+    redirect_to root_path
   end
 
 private  

@@ -1,9 +1,14 @@
 TasksVateudNet::Application.routes.draw do
 
   devise_for :users
-  resources :tasks
+  resources :tasks, :except => [:destroy]
 
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
+
+  put 'tasks/accept/:id' => 'tasks#accept'
+  put 'tasks/cancel/:id' => 'tasks#cancel'
+  put 'tasks/progress/:id' => 'tasks#progress'
+  put 'tasks/halt/:id' => 'tasks#halt'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

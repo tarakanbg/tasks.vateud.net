@@ -3,6 +3,8 @@
 
   <div class="form-inputs">
     <%= f.association :author, label_method: :name, value_method: :id, include_blank: false %>
+    <%= f.label "Parent task" %>
+    <%= f.select :parent_id, nested_set_options(Task, @task) {|i| "#{'-' * i.level} #{i.name}" }, include_blank: true %>
     <%= f.input :name %>
     <%= f.input :description %>
     <div class="control-group string optional">
@@ -16,8 +18,10 @@
           </div>
         </div>
       </div>
-    <%= f.association :status %>
+    <%= f.association :status, include_blank: false %>
+    <%= f.association :users, as: :check_boxes  %>
     <%= f.input :active %>
+    <%= f.hidden_field :parent_id %>
 
   </div>
 

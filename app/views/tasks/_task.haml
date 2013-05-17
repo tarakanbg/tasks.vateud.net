@@ -1,0 +1,33 @@
+%li
+  .name= link_to (task.name), task_path(task)
+  .status
+    %span{:class => "label label-#{task.status.css}" }= task.status.name
+  .due_date= task.due_date
+  .assignees= task.assignees
+  .controls
+    = link_to raw('<i class="icon-tasks"></i>'), task_path(task), :title => "Task Details"
+    - if (task.status_id > 1 && task.users.include?(current_user)) or (task.status_id == 1 && task.author == current_user)
+      = link_to raw('<i class="icon-edit"></i>'), edit_task_path(task), :title => "Edit Task"
+
+    - if (task.status_id == 1 || task.status_id == 6) && task.users.include?(current_user)
+      = link_to raw('<i class="icon-ok"></i>'), {:action => :accept, :id => task.id}, :method => :put, :title => "Accept Task"
+
+    - if (task.status_id > 1 && task.status_id < 6 && task.users.include?(current_user)) or (task.status_id == 1 && task.author == current_user)
+      = link_to raw('<i class="icon-plus"></i>'), new_task_path(:parent_id => task.id), :title => "Create Subtask"
+
+    - if (task.status_id == 2 || task.status_id == 5) && task.users.include?(current_user)
+      = link_to raw('<i class="icon-forward"></i>'), {:action => :progress, :id => task.id}, :method => :put, :title => "Mark In Progress"
+
+    - if task.status_id == 3 && task.users.include?(current_user)
+      = link_to raw('<i class="icon-warning-sign"></i>'), {:action => :halt, :id => task.id}, :method => :put, :title => "Mark as Halted"
+
+    - if (task.status_id > 1 && task.status_id < 6 && task.users.include?(current_user)) or (task.status_id == 1 && task.author == current_user)
+      = link_to raw('<i class="icon-remove"></i>'), {:action => :cancel, :id => task.id}, :method => :put, :confirm => "Are you sure you want to cancel this task?", :title => "Cancel Task"
+
+
+  .clear
+  - if task.has_children?
+    %ul.nested_tasks
+      - task.children.each do |child|
+        = render :partial => 'task', :locals => { :task => child }
+

@@ -12,13 +12,12 @@
       / </a>
       .nav-collapse.collapse
         %ul.nav.pull-right
-          %li
-            <a href="/" data-no-turbolink>ENROLL</a>
-          %li= link_to "PILOT'S LIBRARY", "/library"
-          / %li= link_to "STATISTICS", root_url + "statistics"
-          / %li= link_to "PILOTS", pilots_url
-          / %li= link_to "TRAININGS", trainings_url
-          / %li= link_to "EXAMINATIONS", examinations_url
+          %li= link_to raw('<i class="icon-plus icon-white"></i> NEW TASK'), new_task_path
+          %li= link_to raw('<i class="icon-tasks icon-white"></i> MY TASKS'), root_path(:my => "true")
+          %li= link_to raw('<i class="icon-folder-open icon-white"></i> ALL TASKS'), tasks_path
+          %li= link_to raw('<i class="icon-lock icon-white"></i> ARCHIVE'), tasks_path(:archived => "true")
+          %li= link_to raw('<i class="icon-user icon-white"></i> USERS'), "#"
+
           / %li.dropdown
           /   <a href="#" class="dropdown-toggle" data-toggle="dropdown">
           /   PTD STAFF

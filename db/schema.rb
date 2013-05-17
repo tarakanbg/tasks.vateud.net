@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130516004604) do
+ActiveRecord::Schema.define(:version => 20130517163024) do
 
   create_table "rails_admin_histories", :force => true do |t|
     t.text     "message"
@@ -44,6 +44,15 @@ ActiveRecord::Schema.define(:version => 20130516004604) do
     t.boolean  "active",      :default => true
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
+    t.integer  "lft"
+    t.integer  "rgt"
+    t.integer  "parent_id"
+    t.integer  "depth"
+  end
+
+  create_table "tasks_users", :force => true do |t|
+    t.integer "task_id"
+    t.integer "user_id"
   end
 
   create_table "users", :force => true do |t|

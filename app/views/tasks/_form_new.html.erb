@@ -1,0 +1,33 @@
+<%= simple_form_for(@task) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%- if params[:parent_id] %>
+      <%= f.label "Parent task" %>
+      <%= f.select :parent_id, nested_set_options(Task, @task) {|i| "#{'-' * i.level} #{i.name}" }, include_blank: true %>
+    <% end %>
+    <%= f.input :name %>
+    <%= f.input :description %>
+    <div class="control-group string optional">
+      <label class="string optional control-label">Due date</label>
+      <div>
+        <div class="controls">
+          <div class="datepicker input-append date" id="dp3" data-date="<%= @task.due_date %>" data-date-format="yyyy-mm-dd">
+
+            <input class="span3" size="16" type="text" id="task_due_date" name="task[due_date]" value="<%= @task.due_date %>">
+            <span class="add-on"><i class="icon-th"></i></span>
+          </div>
+        </div>
+      </div>
+    <%= f.association :users, as: :check_boxes  %>
+    <%= f.hidden_field :parent_id %>
+    <%= f.hidden_field :author_id %>
+    <%= f.hidden_field :status_id %>
+    <%= f.hidden_field :active %>
+
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

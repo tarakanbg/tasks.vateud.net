@@ -52,3 +52,5 @@ gem "will_paginate", "~> 3.0.4"
 gem "bootstrap-will_paginate", "~> 0.0.9"
 gem "meta_search", "~> 1.1.3"
 gem 'jquery-ui-rails'
+
+gem "awesome_nested_set", "~> 2.1.6"

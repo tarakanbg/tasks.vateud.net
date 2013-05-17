@@ -13,8 +13,30 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
-//= require jquery.ui.all
-//= require_tree ./frontend 
+//= require_tree ./frontend
 //=  require 'raphael'
 //=  require 'morris'
 //=  require 'graphs'
+
+var tree = $("#tasks");
+tree.bind("loaded.jstree", function (event, data) {
+    tree.jstree("open_all");
+});
+
+$(function () {
+    $("#tasks").jstree({
+        "plugins" : [ "themes", "html_data" ]
+    });
+    $("#tasks").jstree("set_theme","default");
+    $("#tasks").jstree("open_all");
+
+});
+
+$(function () {
+    $(".popped").popover(
+        {
+            offset: 5,
+            placement: 'left'
+        }
+    );
+});

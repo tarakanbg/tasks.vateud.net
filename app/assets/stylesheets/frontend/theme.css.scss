@@ -517,3 +517,23 @@ p#notice {display: none;}
 .datepicker {cursor:pointer}
 
 #footer {position: fixed; bottom: 0px; width: 100%; }
+
+body {margin-bottom: 60px;}
+
+ul.tasks, ul.nested_tasks {list-style-type: none;}
+ul.tasks {margin: 0px 0px 10px 0px;}
+
+table.task {display:inline-table; margin-left: 20px;}
+
+.name {display: inline-block; padding-right: 15px; width:290px;}
+.tasks_legend .name {display: inline-block; padding-right: 15px; width:290px; margin-left:19px;}
+.tasks_legend {font-weight:bold; border-bottom: 1px solid grey; margin-bottom: 10px;}
+ul.nested_tasks > li > .name {display: inline-block; padding-right: 15px; width:272px;}
+ul.nested_tasks ul.nested_tasks > li > .name {display: inline-block; padding-right: 15px; width:254px;}
+ul.nested_tasks ul.nested_tasks ul.nested_tasks > li > .name {display: inline-block; padding-right: 15px; width:236px;}
+ul.nested_tasks ul.nested_tasks ul.nested_tasks ul.nested_tasks > li > .name {display: inline-block; padding-right: 15px; width:218px;}
+.status   {display: inline-block;padding-left: 15px; padding-right: 15px; width:100px;}
+.assignees  {display: inline-block;padding-left: 15px; padding-right: 15px; width:190px;}
+.due_date  {display: inline-block;padding-left: 15px; padding-right: 15px; width:100px;}
+.controls {display: inline-block;padding-left: 15px; padding-right: 15px;}
+.task_red {color: #ff2123;}
