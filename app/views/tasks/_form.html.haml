@@ -23,7 +23,7 @@
         = f.association :status, include_blank: false
     .row
       .span12
-        = f.input :description, :input_html => { :class => 'span11' }
+        = f.input :description, :input_html => { :class => 'span11 wysihtml5' }
 
     .row
       .span10
@@ -32,9 +32,11 @@
     = f.hidden_field :author_id
     = f.hidden_field :status_id
     = f.hidden_field :active
+
     .row
       .span8
-        = f.button :submit, :class => "btn btn-primary"
+        = f.button :submit, :class => "btn btn-success"
+        = f.button :submit, "Upload attachment", :class => "btn btn-primary"
         = link_to 'Cancel', tasks_path(:my => "true"), :class => "btn"
 
 

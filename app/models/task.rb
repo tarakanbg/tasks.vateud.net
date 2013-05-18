@@ -9,6 +9,7 @@ class Task < ActiveRecord::Base
   belongs_to :status
   has_and_belongs_to_many :users
   has_many :tasks, :as => :author
+  has_many :attachments, :dependent => :destroy
 
   validates_presence_of :name, :status_id, :due_date, :author_id
 

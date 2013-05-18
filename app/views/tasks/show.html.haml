@@ -24,7 +24,7 @@
 .task-details.row
   .span12
     .task-label Description:
-    .task-value= @task.description
+    .task-value= raw(@task.description)
 - if @task.has_children?
   .task-details.row
     .span12

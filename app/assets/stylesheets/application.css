@@ -11,6 +11,7 @@
  *= require_self
  *= require jquery.ui.core
  *= require jquery.ui.theme
- *= require_tree ./frontend 
+ *= require_tree ./frontend
+ *= require bootstrap-wysihtml5
  */
 

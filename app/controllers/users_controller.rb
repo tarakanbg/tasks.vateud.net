@@ -18,7 +18,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @pagetitle = "Active tasks for user #{@user.name}"
-    @tasks = @user.tasks.roots
+    @tasks = @user.tasks.active.roots
 
     respond_to do |format|
       format.html # show.html.haml

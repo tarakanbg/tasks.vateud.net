@@ -11,7 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130518023310) do
+ActiveRecord::Schema.define(:version => 20130518045638) do
+
+  create_table "attachments", :force => true do |t|
+    t.string   "name"
+    t.integer  "task_id"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+    t.string   "upload_file_name"
+    t.string   "upload_content_type"
+    t.integer  "upload_file_size"
+    t.datetime "upload_updated_at"
+  end
 
   create_table "rails_admin_histories", :force => true do |t|
     t.text     "message"

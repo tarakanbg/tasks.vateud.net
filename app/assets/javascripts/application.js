@@ -17,6 +17,8 @@
 //=  require 'raphael'
 //=  require 'morris'
 //=  require 'graphs'
+//= require bootstrap-wysihtml5
+//= require bootstrap-wysihtml5/locales
 
 var tree = $("#tasks");
 tree.bind("loaded.jstree", function (event, data) {
@@ -32,11 +34,8 @@ $(function () {
 
 });
 
-$(function () {
-    $(".popped").popover(
-        {
-            offset: 5,
-            placement: 'left'
-        }
-    );
-});
+
+
+$('.wysihtml5').each(function(i, elem) {
+    $(elem).wysihtml5();
+    });

@@ -54,3 +54,5 @@ gem "meta_search", "~> 1.1.3"
 gem 'jquery-ui-rails'
 
 gem "awesome_nested_set", "~> 2.1.6"
+gem "bootstrap-wysihtml5-rails", "~> 0.3.1.20"
+gem "paperclip", "~> 3.4.2"
