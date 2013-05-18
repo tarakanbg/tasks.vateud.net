@@ -10,6 +10,8 @@ class Task < ActiveRecord::Base
   has_and_belongs_to_many :users
   has_many :tasks, :as => :author
 
+  validates_presence_of :name, :status_id, :due_date, :author_id
+
   scope :roots, where(:parent_id => nil)
   scope :active, where(:active => true)
   scope :inactive, where(:active => false)

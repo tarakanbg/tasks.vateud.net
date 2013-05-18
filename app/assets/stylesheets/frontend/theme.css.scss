@@ -466,8 +466,8 @@ header {
 #login {width:235px; min-height:230px;margin-left:auto;margin-right:auto;padding-top:40px;padding-left:40px; padding-right:40px; padding-bottom:10px;background:#E0E6EE;border:1px solid gray; margin-top:70px;}
 #enroll {width:400px; min-height:430px;margin-left:auto;margin-right:auto;padding-top:40px;padding-left:40px; padding-right:40px; padding-bottom:10px;background:#E0E6EE;border:1px solid gray;}
 .rememberme {float:left;}
-.rememberme label {display:inline; color:gray; }
-.rememberme input {float:right; display:inline;margin-left:20px;}
+.rememberme label {display:inline-block; color:gray; margin-bottom: -5px; }
+.rememberme input {float:right; display:inline-block;margin-left:20px;}
 
 .form-horizontal .control-label {text-align: left; font-weight: bold; color:#004661;}
 #enroll p label {text-align: left; font-weight: bold; color: #004661; width: 150px; display:inline; float:left;}
@@ -537,3 +537,15 @@ ul.nested_tasks ul.nested_tasks ul.nested_tasks ul.nested_tasks > li > .name {di
 .due_date  {display: inline-block;padding-left: 15px; padding-right: 15px; width:100px;}
 .controls {display: inline-block;padding-left: 15px; padding-right: 15px;}
 .task_red {color: #ff2123;}
+.task-label {font-size: larger; font-weight: bold; text-shadow: 2px 2px 6px #000000;
+  filter: dropshadow(color=#000000, offx=2, offy=2);margin-bottom: 5px;}
+.task-value {font-size:1.2em;}
+.task-details + .task-details {margin-top:10px;}
+.task-buttons {margin-top: 40px;}
+.task-buttons + .task-buttons {margin-top: 10px;}
+
+table.users {width: 100%;}
+table.users td, th {text-align: left;}
+
+.task-form label.control-label {font-size: larger; font-weight: bold; text-shadow: 2px 2px 6px #000000;
+  filter: dropshadow(color=#000000, offx=2, offy=2);margin-bottom: 5px;}

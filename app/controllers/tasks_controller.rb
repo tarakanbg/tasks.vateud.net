@@ -1,4 +1,6 @@
 class TasksController < ApplicationController
+
+  before_filter :confirm_enabled, :except => [:forbidden]
   # GET /tasks
   # GET /tasks.json
   def index
@@ -20,7 +22,7 @@ class TasksController < ApplicationController
     @tasks = @search.paginate(:page => params[:page], :per_page => 20).order(ord)
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # index.html.haml
       format.json { render json: @tasks }
     end
   end
@@ -32,7 +34,7 @@ class TasksController < ApplicationController
     @pagetitle = "Task details: #{@task.name}"
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html # show.html.haml
       format.json { render json: @task }
     end
   end
@@ -143,6 +145,19 @@ class TasksController < ApplicationController
     redirect_to root_path
   end
 
+  def complete
+    @task = Task.find(params[:id])
+    @task.status_id = 4
+    @task.active = false
+    @task.save
+    redirect_to :back
+  rescue ActionController::RedirectBackError
+    redirect_to root_path
+  end
+
+  def forbidden
+    @pagetitle = "Your account is pending approval"
+  end
 private  
 
   def get_order(param)

@@ -16,18 +16,15 @@
           %li= link_to raw('<i class="icon-tasks icon-white"></i> MY TASKS'), root_path(:my => "true")
           %li= link_to raw('<i class="icon-folder-open icon-white"></i> ALL TASKS'), tasks_path
           %li= link_to raw('<i class="icon-lock icon-white"></i> ARCHIVE'), tasks_path(:archived => "true")
-          %li= link_to raw('<i class="icon-user icon-white"></i> USERS'), "#"
 
-          / %li.dropdown
-          /   <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-          /   PTD STAFF
-          /   <b class="caret"></b>
-          /   </a>
-          /   %ul.dropdown-menu                  
-          /     %li= link_to "Managers", root_url + "staff"
-          /     %li= link_to "Examiners", root_url + "staff"
-          /     %li= link_to "Instructors", root_url + "staff"
-          /     %li
-          /       <a href="/admin" data-no-turbolink>Staff login</a>
+          %li.dropdown
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <i class="icon-user icon-white"></i>
+            USERS
+            <b class="caret"></b>
+            </a>
+            %ul.dropdown-menu
+              %li= link_to "Users List", users_path
+              %li= link_to "Logout", destroy_user_session_path, :method => :delete
 
             

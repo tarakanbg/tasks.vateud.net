@@ -1,0 +1,38 @@
+= simple_form_for(@task) do |f|
+  = f.error_notification
+  .form-inputs.task-form
+    .row
+      .span8
+        = f.input :name, :input_html => { :class => 'span7' }
+      .span4
+        .control-group.string.optional
+          %label.string.optional.control-label Due date
+          %div
+            .controls
+              #dp3.datepicker.input-append.date{"data-date" => @task.due_date, "data-date-format" => "yyyy-mm-dd"}
+                %input#task_due_date.span3{:name => "task[due_date]", :size => "16", :type => "text", :value => @task.due_date}
+                %span.add-on
+                  %i.icon-th
+
+    .row
+      .span8
+        - if params[:parent_id]
+          = f.label "Parent task"
+          = f.select :parent_id, nested_set_options(Task, @task) {|i| "#{'-' * i.level} #{i.name}" }, include_blank: true
+
+    .row
+      .span12
+        = f.input :description, :input_html => { :class => 'span11' }
+
+    .row
+      .span10
+        = f.association :users, as: :check_boxes, :label => "Assignees"
+    = f.hidden_field :parent_id
+    = f.hidden_field :author_id
+    = f.hidden_field :status_id
+    = f.hidden_field :active
+    .row
+      .span8
+        = f.button :submit, :class => "btn btn-primary"
+        = link_to 'Cancel', tasks_path(:my => "true"), :class => "btn"
+

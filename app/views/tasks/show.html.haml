@@ -1,0 +1,61 @@
+%p#notice= notice
+
+.task-details.row
+  .span3
+    .task-label Created by:
+    .task-value= @task.author.name
+  .span3
+    .task-label Created at:
+    .task-value= @task.created_at
+  .span3
+    .task-label Status:
+    .task-value
+      %span{:class => "label label-#{@task.status.css}"}= @task.status.name
+  .span3
+    .task-label Due date:
+    .task-value= @task.due_date
+.task-details.row
+  .span6
+    .task-label Assignees:
+    .task-value= @task.assignees
+  .span6
+    .task-label Parent task:
+    .task-value= @task.parent ? @task.parent.name : "None"
+.task-details.row
+  .span12
+    .task-label Description:
+    .task-value= @task.description
+- if @task.has_children?
+  .task-details.row
+    .span12
+      .task-label Subtasks:
+      #tasks
+        %ul.tasks
+          - @task.children.each do |task|
+            = render :partial => 'task', :locals => { :task => task }
+
+.task-buttons.row
+  - if (@task.status_id > 1 && @task.users.include?(current_user)) or (@task.status_id == 1 && @task.author == current_user)
+    = link_to raw('<i class="icon-edit icon-white"></i> Edit'), edit_task_path(@task), :title => "Edit task", :class => "btn btn-primary"
+
+  - if (@task.status_id == 1 || @task.status_id == 6) && @task.users.include?(current_user)
+    = link_to raw('<i class="icon-thumbs-up icon-white"></i> Accept Task'), {:action => :accept, :id => @task.id}, :method => :put, :title => "Accept task", :class => "btn btn-success"
+
+  - if (@task.status_id > 1 && @task.status_id < 6 && @task.users.include?(current_user)) or (@task.status_id == 1 && @task.author == current_user)
+    = link_to raw('<i class="icon-plus icon-white"></i> Create Subtask'), new_task_path(:parent_id => @task.id), :title => "Create Subtask", :class => "btn btn-info"
+
+  - if (@task.status_id == 2 || @task.status_id == 5) && @task.users.include?(current_user)
+    = link_to raw('<i class="icon-forward icon-white"></i> Mark In Progress'), {:action => :progress, :id => @task.id}, :method => :put, :title => "Mark In Progress", :class => "btn btn-success"
+
+  - if @task.status_id == 3 && @task.users.include?(current_user)
+    = link_to raw('<i class="icon-warning-sign icon-white"></i> Mark Halted'), {:action => :halt, :id => @task.id}, :method => :put, :title => "Mark as Halted", :class => "btn btn-warning"
+
+  - if @task.status_id > 0 && @task.status_id < 6 && @task.users.include?(current_user)
+    = link_to raw('<i class="icon-ok icon-white"></i> Mark Completed'), {:action => :complete, :id => @task.id}, :method => :put, :title => "Mark Completed", :class => "btn btn-success"
+
+  - if (@task.status_id > 1 && @task.status_id < 6 && @task.users.include?(current_user)) or (@task.status_id == 1 && @task.author == current_user)
+    = link_to raw('<i class="icon-remove icon-white"></i> Mark Cancelled'), {:action => :cancel, :id => @task.id}, :method => :put, :confirm => "Are you sure you want to cancel this task?", :title => "Cancel task", :class => "btn btn-danger"
+.task-buttons.row
+  = link_to raw('<i class="icon-tasks"></i> Show All Tasks'), tasks_path, :class => "btn"
+  = link_to raw('<i class="icon-home"></i> Show My Tasks'), tasks_path(:my => "true"), :class => "btn"
+
