@@ -73,7 +73,7 @@ class TasksController < ApplicationController
         @task.informed = informed    
         @task.save
         informed.delete(current_user.id)
-        Task.send_notifications(@task, informed)  
+        Task.send_notifications(@task, informed) if informed && informed.count > 0  
 
         format.html { redirect_to @task, notice: 'Task was successfully created.' }
         format.json { render json: @task, status: :created, location: @task }
@@ -101,7 +101,7 @@ class TasksController < ApplicationController
           @task.informed = merged 
           @task.save
           uninformed.delete(current_user.id)
-          Task.send_notifications(@task, uninformed) if uninformed.count > 0
+          Task.send_notifications(@task, uninformed) if uninformed && uninformed.count > 0
 
           format.html { redirect_to @task, notice: 'Task was successfully updated.' }
           format.json { head :no_content }
