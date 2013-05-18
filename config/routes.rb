@@ -3,6 +3,7 @@ TasksVateudNet::Application.routes.draw do
   devise_for :users
   resources :tasks, :except => [:destroy]
   resources :users, :except => [:destroy, :new, :create]
+  resources :attachments, :except => [:index, :show]
 
   mount RailsAdmin::Engine => '/tadam', :as => 'rails_admin'
 

@@ -2,31 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="43afb121-4b7a-4075-a4b2-c37623fe4768" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/db/migrate/20130518045540_create_attachments.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/db/migrate/20130518045638_add_attachment_upload_to_attachments.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/models/attachment.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/unit/attachment_test.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/fixtures/attachments.yml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/assets/javascripts/frontend/4_flexslider.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/assets/javascripts/frontend/6_index-slider.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/assets/javascripts/library.js.coffee" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gemfile.lock" afterPath="$PROJECT_DIR$/Gemfile.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gemfile" afterPath="$PROJECT_DIR$/Gemfile" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/tasks/_form.html.haml" afterPath="$PROJECT_DIR$/app/views/tasks/_form.html.haml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/tasks/_form_new.html.haml" afterPath="$PROJECT_DIR$/app/views/tasks/_form_new.html.haml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/stylesheets/application.css" afterPath="$PROJECT_DIR$/app/assets/stylesheets/application.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/layouts/application.html.haml" afterPath="$PROJECT_DIR$/app/views/layouts/application.html.haml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/javascripts/application.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/application.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/schema.rb" afterPath="$PROJECT_DIR$/db/schema.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/tasks/show.html.haml" afterPath="$PROJECT_DIR$/app/views/tasks/show.html.haml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/task.rb" afterPath="$PROJECT_DIR$/app/models/task.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/tasks_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/tasks_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/users_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/users_controller.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="tasks.vateud.net.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="43afb121-4b7a-4075-a4b2-c37623fe4768" time="1368852888557" ignored="false" />
+    <file path="/Dummy.txt" changelist="43afb121-4b7a-4075-a4b2-c37623fe4768" time="1368854340826" ignored="false" />
     <file path="/theme.css.scss" changelist="43afb121-4b7a-4075-a4b2-c37623fe4768" time="1368850150075" ignored="false" />
     <file path="/tasks_controller.rb" changelist="43afb121-4b7a-4075-a4b2-c37623fe4768" time="1368854181066" ignored="false" />
     <file path="/task.rb" changelist="43afb121-4b7a-4075-a4b2-c37623fe4768" time="1368853156544" ignored="false" />
@@ -188,7 +168,7 @@
       <file leaf-file-name="tasks_controller.rb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/controllers/tasks_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="87" column="41" selection-start="2325" selection-end="2330" vertical-scroll-proportion="0.80701756">
+            <state line="70" column="46" selection-start="1798" selection-end="1798" vertical-scroll-proportion="0.08070175">
               <folding />
             </state>
           </provider>
@@ -1424,7 +1404,11 @@
       <created>1368850615627</created>
       <updated>1368850615627</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="attachments">
+      <created>1368854345108</created>
+      <updated>1368854345108</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1452,7 +1436,7 @@
     <editor active="false" />
     <layout>
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32911393" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32796317" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32796317" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32911393" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3283582" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.67012686" order="3" side_tool="false" content_ui="tabs" />
@@ -1513,7 +1497,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="tasks and users" />
+    <option name="LAST_COMMIT_MESSAGE" value="attachments" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1530,6 +1514,7 @@
     <MESSAGE value="modelling" />
     <MESSAGE value="datepicker" />
     <MESSAGE value="tasks and users" />
+    <MESSAGE value="attachments" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1642,7 +1627,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/tasks_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="87" column="41" selection-start="2325" selection-end="2330" vertical-scroll-proportion="0.80701756">
+        <state line="70" column="46" selection-start="1798" selection-end="1798" vertical-scroll-proportion="0.08070175">
           <folding />
         </state>
       </provider>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130518045638) do
+ActiveRecord::Schema.define(:version => 20130518151327) do
 
   create_table "attachments", :force => true do |t|
     t.string   "name"
@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(:version => 20130518045638) do
     t.integer  "rgt"
     t.integer  "parent_id"
     t.integer  "depth"
+    t.text     "informed"
   end
 
   create_table "tasks_users", :force => true do |t|

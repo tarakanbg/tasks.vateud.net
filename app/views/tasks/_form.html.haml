@@ -23,7 +23,7 @@
         = f.association :status, include_blank: false
     .row
       .span12
-        = f.input :description, :input_html => { :class => 'span11 wysihtml5' }
+        = f.input :description, :input_html => { :class => 'span11 wysihtml5', :rows => 15 }
 
     .row
       .span10
@@ -33,7 +33,9 @@
     = f.hidden_field :status_id
     = f.hidden_field :active
 
-    .row
+    = render :partial => "attachments"
+
+    .row.task-buttons
       .span8
         = f.button :submit, :class => "btn btn-success"
         = f.button :submit, "Upload attachment", :class => "btn btn-primary"

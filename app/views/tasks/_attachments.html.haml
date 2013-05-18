@@ -1,0 +1,16 @@
+- if @task.has_attachments?
+  .task-details.row
+    .span12
+      .task-label Attachments:
+      #attachments
+        %table.attachments
+          %tr
+            %th Name / Download
+            %th Actions
+          - for att in @task.attachments
+            %tr
+              %td= link_to att.name, att.upload.url
+              %td
+                - if (@task.status_id > 1 && @task.users.include?(current_user)) or (@task.status_id == 1 && @task.author == current_user)
+                  = link_to raw('<i class="icon-edit icon-white"></i> Edit Attachment'), edit_attachment_path(att), :title => "Edit attachment", :class => "btn btn-primary btn-mini"
+                  = link_to raw('<i class="icon-trash icon-white"></i> Delete Attachment'), attachment_path(att), :method => :delete, :confirm => "Are you sure you want to delete this attachment?",  :title => "Delete attachment", :class => "btn btn-danger btn-mini"

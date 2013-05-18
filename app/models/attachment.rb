@@ -4,4 +4,8 @@ class Attachment < ActiveRecord::Base
   has_attached_file :upload
 
   belongs_to :task
+
+  validates :upload, attachment_presence: true, presence: true
+  validates :name, presence: true
+  validates :task_id, presence: true
 end

@@ -1,6 +1,8 @@
 class Task < ActiveRecord::Base
   attr_accessible :active, :author_id, :description, :due_date, :name, :status_id, :user_ids,
-                  :parent_id, :lft, :rgt
+                  :parent_id, :lft, :rgt, :informed
+
+  serialize :informed                
   attr_reader :assignees
 
   acts_as_nested_set
@@ -8,7 +10,7 @@ class Task < ActiveRecord::Base
   belongs_to :author, :class_name => "User", :foreign_key => "author_id"
   belongs_to :status
   has_and_belongs_to_many :users
-  has_many :tasks, :as => :author
+  # has_many :tasks, :as => :author
   has_many :attachments, :dependent => :destroy
 
   validates_presence_of :name, :status_id, :due_date, :author_id
@@ -17,6 +19,15 @@ class Task < ActiveRecord::Base
   scope :active, where(:active => true)
   scope :inactive, where(:active => false)
 
+  # before_save :update_informed
+
+
+  def self.send_notifications(task, users)
+    task = Task.find(task.id)
+    emails = []
+    users.each {|u| emails << User.find(u).email}
+    UserMailer.task_email(task, emails).deliver
+  end
 
   def assignees
     assignees = []
@@ -26,6 +37,10 @@ class Task < ActiveRecord::Base
 
   def has_children?
     self.children.count > 0 ? true : false
+  end
+
+  def has_attachments?
+    self.attachments.count > 0 ? true : false
   end
 
 

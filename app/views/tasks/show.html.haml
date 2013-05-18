@@ -25,6 +25,9 @@
   .span12
     .task-label Description:
     .task-value= raw(@task.description)
+
+= render :partial => "attachments"
+
 - if @task.has_children?
   .task-details.row
     .span12
@@ -37,6 +40,8 @@
 .task-buttons.row
   - if (@task.status_id > 1 && @task.users.include?(current_user)) or (@task.status_id == 1 && @task.author == current_user)
     = link_to raw('<i class="icon-edit icon-white"></i> Edit'), edit_task_path(@task), :title => "Edit task", :class => "btn btn-primary"
+  - if (@task.status_id > 1 && @task.status_id < 6 && @task.users.include?(current_user)) or (@task.status_id == 1 && @task.author == current_user)
+    = link_to raw('<i class="icon-upload icon-white"></i> Upload attachment'), new_attachment_path(:task => @task.id), :title => "Upload attachment", :class => "btn btn-primary"
 
   - if (@task.status_id == 1 || @task.status_id == 6) && @task.users.include?(current_user)
     = link_to raw('<i class="icon-thumbs-up icon-white"></i> Accept Task'), {:action => :accept, :id => @task.id}, :method => :put, :title => "Accept task", :class => "btn btn-success"

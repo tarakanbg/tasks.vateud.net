@@ -68,6 +68,13 @@ class TasksController < ApplicationController
 
     respond_to do |format|
       if @task.save
+        informed = []        
+        @task.users.each {|u| informed << u.id}
+        @task.informed = informed    
+        @task.save
+        informed.delete(current_user.id)
+        Task.send_notifications(@task, informed)  
+
         format.html { redirect_to @task, notice: 'Task was successfully created.' }
         format.json { render json: @task, status: :created, location: @task }
       else
@@ -85,8 +92,17 @@ class TasksController < ApplicationController
     respond_to do |format|
       if @task.update_attributes(params[:task])
         if params[:commit] == 'Upload attachment'
-          format.html { redirect_to @task, notice: 'Task was successfully updated.' }
+          format.html { redirect_to new_attachment_path(:task => @task.id) , notice: 'Task was successfully updated.' }
         else
+          informed = @task.informed
+          uninformed = []       
+          @task.users.each {|u| uninformed << u.id unless informed.include?(u.id)}
+          merged = informed.zip(uninformed).flatten.compact
+          @task.informed = merged 
+          @task.save
+          uninformed.delete(current_user.id)
+          Task.send_notifications(@task, uninformed) if uninformed.count > 0
+
           format.html { redirect_to @task, notice: 'Task was successfully updated.' }
           format.json { head :no_content }
         end
