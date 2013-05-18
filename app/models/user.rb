@@ -11,4 +11,6 @@ class User < ActiveRecord::Base
   # attr_accessible :title, :body
 
   has_and_belongs_to_many :tasks
+
+  validates_presence_of :name, :email
 end
