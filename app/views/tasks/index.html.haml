@@ -7,7 +7,11 @@
 #tasks
   %ul.tasks
     - @tasks.each do |task|
-      = render :partial => 'task', :locals => { :task => task }
+      - if params[:archived] == "true"
+        = render :partial => 'tasks/task', :locals => { :task => task }
+      - else 
+        - if task.active?
+          = render :partial => 'tasks/task', :locals => { :task => task }
 
 = will_paginate @collection
 
