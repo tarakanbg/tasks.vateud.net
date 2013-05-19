@@ -5,14 +5,7 @@
       .span8
         = f.input :name, :input_html => { :class => 'span7' }
       .span4
-        .control-group.string.optional
-          %label.string.optional.control-label Due date
-          %div
-            .controls
-              #dp3.datepicker.input-append.date{"data-date" => @task.due_date, "data-date-format" => "yyyy-mm-dd"}
-                %input#task_due_date.span3{:name => "task[due_date]", :size => "16", :type => "text", :value => @task.due_date}
-                %span.add-on
-                  %i.icon-th
+        = f.input :due_date, as: :string, :input_html => { :class => 'span2', :data => {:behaviour => 'datepicker'}}
 
     .row
       .span8

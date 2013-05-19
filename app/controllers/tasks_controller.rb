@@ -13,7 +13,7 @@ class TasksController < ApplicationController
       @pagetitle = "VATEUD Active Tasks"
     end
     if params[:archived] && params[:archived] == "true"
-      @search = @search.inactive
+      @search = Task.inactive
       @pagetitle = "VATEUD Archived Tasks"
     else
       @search = @search.active
@@ -177,6 +177,9 @@ class TasksController < ApplicationController
 
   def forbidden
     @pagetitle = "Your account is pending approval"
+    if current_user.enabled?
+      redirect_to root_path
+    end
   end
 private  
 

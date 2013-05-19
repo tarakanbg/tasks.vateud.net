@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/tarakanbg/bootstrap-wysihtml5-rails.git
+  revision: f3b87675df2b848f621224ee3382cc8c3bc5ee10
+  specs:
+    bootstrap-wysihtml5-rails (0.3.1.20)
+      railties (>= 3.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -32,12 +39,12 @@ GEM
     awesome_nested_set (2.1.6)
       activerecord (>= 3.0.0)
     bcrypt-ruby (3.0.1)
+    bootstrap-datepicker-rails (1.0.0.7)
+      railties (>= 3.0)
     bootstrap-sass (2.3.1.0)
       sass (~> 3.2)
     bootstrap-will_paginate (0.0.9)
       will_paginate
-    bootstrap-wysihtml5-rails (0.3.1.20)
-      railties (>= 3.0)
     builder (3.0.4)
     climate_control (0.0.3)
       activesupport (>= 3.0)
@@ -51,7 +58,7 @@ GEM
       execjs
     coffee-script-source (1.6.2)
     daemons (1.1.9)
-    devise (2.2.3)
+    devise (2.2.4)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
       railties (~> 3.1)
@@ -74,12 +81,11 @@ GEM
     jquery-ui-rails (3.0.1)
       jquery-rails
       railties (>= 3.1.0)
-    json (1.7.7)
+    json (1.8.0)
     kaminari (0.14.1)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
-    mail (2.5.3)
-      i18n (>= 0.4.0)
+    mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     meta_search (1.1.3)
@@ -125,7 +131,7 @@ GEM
       activesupport (= 3.2.13)
       bundler (~> 1.0)
       railties (= 3.2.13)
-    rails_admin (0.4.7)
+    rails_admin (0.4.8)
       bootstrap-sass (~> 2.2)
       builder (~> 3.0)
       coffee-rails (~> 3.1)
@@ -151,8 +157,8 @@ GEM
     rdoc (3.12.2)
       json (~> 1.4)
     remotipart (1.0.5)
-    safe_yaml (0.9.0)
-    sass (3.2.8)
+    safe_yaml (0.9.1)
+    sass (3.2.9)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
       sass (>= 3.1.10)
@@ -176,7 +182,7 @@ GEM
       polyglot
       polyglot (>= 0.3.1)
     tzinfo (0.3.37)
-    uglifier (2.1.0)
+    uglifier (2.1.1)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
     warden (1.2.1)
@@ -188,8 +194,9 @@ PLATFORMS
 
 DEPENDENCIES
   awesome_nested_set (~> 2.1.6)
+  bootstrap-datepicker-rails
   bootstrap-will_paginate (~> 0.0.9)
-  bootstrap-wysihtml5-rails (~> 0.3.1.20)
+  bootstrap-wysihtml5-rails!
   coffee-rails (~> 3.2.1)
   devise
   jquery-rails

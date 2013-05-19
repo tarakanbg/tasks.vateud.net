@@ -13,29 +13,11 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
-//= require_tree ./frontend
+//= require bootstrap-wysihtml5
+//= require bootstrap-wysihtml5/locales
+//= require bootstrap-datepicker
 //=  require 'raphael'
 //=  require 'morris'
 //=  require 'graphs'
-//= require bootstrap-wysihtml5
-//= require bootstrap-wysihtml5/locales
+//= require_tree ./frontend
 
-var tree = $("#tasks");
-tree.bind("loaded.jstree", function (event, data) {
-    tree.jstree("open_all");
-});
-
-$(function () {
-    $("#tasks").jstree({
-        "plugins" : [ "themes", "html_data" ]
-    });
-    $("#tasks").jstree("set_theme","default");
-    $("#tasks").jstree("open_all");
-
-});
-
-
-
-$('.wysihtml5').each(function(i, elem) {
-    $(elem).wysihtml5();
-    });

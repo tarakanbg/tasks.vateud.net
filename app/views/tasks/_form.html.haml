@@ -5,20 +5,12 @@
       .span8
         = f.input :name, :input_html => { :class => 'span7' }
       .span4
-        .control-group.string.optional
-          %label.string.optional.control-label Due date
-          %div
-            .controls
-              #dp3.datepicker.input-append.date{"data-date" => @task.due_date, "data-date-format" => "yyyy-mm-dd"}
-                %input#task_due_date.span3{:name => "task[due_date]", :size => "16", :type => "text", :value => @task.due_date}
-                %span.add-on
-                  %i.icon-th
+        = f.input :due_date, as: :string, :input_html => { :class => 'span2', :data => {:behaviour => 'datepicker'}}
 
     .row
-      .span8
-        - if params[:parent_id]
-          = f.label "Parent task"
-          = f.select :parent_id, nested_set_options(Task, @task) {|i| "#{'-' * i.level} #{i.name}" }, include_blank: true
+      .span8        
+        = f.label "Parent task"
+        = f.select :parent_id, nested_set_options(Task.active, @task) {|i| "#{'-' * i.level} #{i.name}" }, include_blank: true
       .span4
         = f.association :status, include_blank: false
     .row
