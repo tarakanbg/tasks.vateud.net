@@ -29,7 +29,7 @@ $(document).ready(function() {
       buttonClass: 'btn',
       buttonWidth: 'auto',
       buttonContainer: '<div class="btn-group" />',
-      maxHeight: false,
+      maxHeight: 400,
       buttonText: function(options) {
         if (options.length == 0) {
           return 'None selected <b class="caret"></b>';
