@@ -8,6 +8,10 @@
         = f.input :due_date, as: :string, :input_html => { :class => 'span2', :data => {:behaviour => 'datepicker'}}
 
     .row
+      .span10
+        = f.association :users, input_html: { class: 'multiselect' }, :label => "Assignees"
+        
+    .row
       .span8
         - if params[:parent_id]
           = f.label "Parent task"
@@ -17,9 +21,6 @@
       .span12
         = f.input :description, :input_html => { :class => 'span11 wysihtml5', :rows => 15 }
 
-    .row
-      .span10
-        = f.association :users, input_html: { class: 'multiselect' }, :label => "Assignees"
     = f.hidden_field :parent_id
     = f.hidden_field :author_id
     = f.hidden_field :status_id

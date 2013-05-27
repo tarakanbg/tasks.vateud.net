@@ -14,12 +14,12 @@
       .span4
         = f.association :status, include_blank: false
     .row
+      .span10
+        = f.association :users, input_html: { class: 'multiselect' }, :label => "Assignees"
+    .row
       .span12
         = f.input :description, :input_html => { :class => 'span11 wysihtml5', :rows => 15 }
 
-    .row
-      .span10
-        = f.association :users, input_html: { class: 'multiselect' }, :label => "Assignees"
     = f.hidden_field :author_id
 
     = render :partial => "attachments"
