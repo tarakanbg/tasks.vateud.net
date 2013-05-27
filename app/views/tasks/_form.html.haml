@@ -19,11 +19,8 @@
 
     .row
       .span10
-        = f.association :users, as: :check_boxes, :label => "Assignees"
-    = f.hidden_field :parent_id
+        = f.association :users, input_html: { class: 'multiselect' }, :label => "Assignees"
     = f.hidden_field :author_id
-    = f.hidden_field :status_id
-    = f.hidden_field :active
 
     = render :partial => "attachments"
 

@@ -1,5 +1,5 @@
 class Task < ActiveRecord::Base
-  attr_accessible :active, :author_id, :description, :due_date, :name, :status_id, :user_ids,
+  attr_accessible :author_id, :description, :due_date, :name, :status_id, :user_ids,
                   :parent_id, :lft, :rgt, :informed
 
   serialize :informed                
@@ -16,8 +16,8 @@ class Task < ActiveRecord::Base
   validates_presence_of :name, :status_id, :due_date, :author_id
 
   scope :roots, where(:parent_id => nil)
-  scope :active, where(:active => true)
-  scope :inactive, where(:active => false)
+  scope :active,  where("status_id != 4 and status_id != 6")
+  scope :inactive, where("status_id = 4 or status_id = 6")
 
   # before_save :update_informed
 
@@ -41,6 +41,14 @@ class Task < ActiveRecord::Base
 
   def has_attachments?
     self.attachments.count > 0 ? true : false
+  end
+
+  def active?
+    if self.status_id == 4 or self.status_id == 6
+      false
+    else
+      true
+    end
   end
 
 

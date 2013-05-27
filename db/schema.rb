@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130518151327) do
+ActiveRecord::Schema.define(:version => 20130527133901) do
 
   create_table "attachments", :force => true do |t|
     t.string   "name"
@@ -52,9 +52,8 @@ ActiveRecord::Schema.define(:version => 20130518151327) do
     t.integer  "priority_id"
     t.date     "due_date"
     t.integer  "status_id"
-    t.boolean  "active",      :default => true
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.integer  "lft"
     t.integer  "rgt"
     t.integer  "parent_id"

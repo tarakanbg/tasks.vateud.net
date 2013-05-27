@@ -6,14 +6,14 @@ class TasksController < ApplicationController
   def index
     ord = get_order(params[:sort])
     if params[:my] && params[:my] == "true"
-      @search = current_user.tasks.roots
+      @search = current_user.tasks.roots.order('created_at DESC')
       @pagetitle = "Tasks for user #{current_user.name}"
     else
-      @search = Task.roots
+      @search = Task.roots.order('created_at DESC')
       @pagetitle = "VATEUD Active Tasks"
     end
     if params[:archived] && params[:archived] == "true"
-      @search = Task.inactive
+      @search = Task.inactive.order('updated_at DESC')
       @pagetitle = "VATEUD Archived Tasks"
     else
       @search = @search.active
@@ -97,7 +97,11 @@ class TasksController < ApplicationController
           informed = @task.informed
           uninformed = []       
           @task.users.each {|u| uninformed << u.id unless informed.include?(u.id)}
-          merged = informed.zip(uninformed).flatten.compact
+          if informed.count > 0
+            merged = informed.zip(uninformed).flatten.compact
+          else
+            merged = uninformed
+          end
           @task.informed = merged 
           @task.save
           uninformed.delete(current_user.id)
@@ -128,7 +132,6 @@ class TasksController < ApplicationController
   def accept
     @task = Task.find(params[:id])
     @task.status_id = 2
-    @task.active = true
     @task.save
     redirect_to :back
   rescue ActionController::RedirectBackError
@@ -138,7 +141,6 @@ class TasksController < ApplicationController
   def cancel
     @task = Task.find(params[:id])
     @task.status_id = 6
-    @task.active = false
     @task.save
     redirect_to :back
   rescue ActionController::RedirectBackError
@@ -148,7 +150,6 @@ class TasksController < ApplicationController
   def progress
     @task = Task.find(params[:id])
     @task.status_id = 3
-    @task.active = true
     @task.save
     redirect_to :back
   rescue ActionController::RedirectBackError
@@ -158,7 +159,6 @@ class TasksController < ApplicationController
   def halt
     @task = Task.find(params[:id])
     @task.status_id = 5
-    @task.active = true
     @task.save
     redirect_to :back
   rescue ActionController::RedirectBackError
@@ -168,7 +168,6 @@ class TasksController < ApplicationController
   def complete
     @task = Task.find(params[:id])
     @task.status_id = 4
-    @task.active = false
     @task.save
     redirect_to :back
   rescue ActionController::RedirectBackError
