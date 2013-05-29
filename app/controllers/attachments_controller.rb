@@ -1,6 +1,8 @@
 class AttachmentsController < ApplicationController
 
   before_filter :confirm_enabled
+  before_filter :confirm_admin, :only => [:destroy]
+  
   # GET /attachments
   # GET /attachments.json
   def index

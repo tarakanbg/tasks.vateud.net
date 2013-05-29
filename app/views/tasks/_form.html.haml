@@ -15,7 +15,7 @@
         = f.association :status, include_blank: false
     .row
       .span10
-        = f.association :users, input_html: { class: 'multiselect' }, :label => "Assignees"
+        = f.association :users, :collection => User.where(:staff => true), input_html: { class: 'multiselect' }, :label => "Assignees", :label_method => :name_position
     .row
       .span12
         = f.input :description, :input_html => { :class => 'span11 wysihtml5', :rows => 15 }

@@ -12,6 +12,15 @@ $(function () {
 
 });
 
+$(function () {
+    $("#arctasks").jstree({
+        "plugins" : [ "themes", "html_data" ]
+    });
+    $("#arctasks").jstree("set_theme","default");
+    // $("#tasks").jstree("open_all");
+
+});
+
 
 $('.wysihtml5').each(function(i, elem) {
     $(elem).wysihtml5();

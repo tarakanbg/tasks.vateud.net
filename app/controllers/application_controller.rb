@@ -8,4 +8,18 @@ class ApplicationController < ActionController::Base
       redirect_to "/forbidden"
     end
   end
+
+  def confirm_staff
+    unless current_user.staff?
+      flash[:error] = "Insufficient privileges! Action available for staff members only!"
+      redirect_to "/forbidden"
+    end
+  end
+
+  def confirm_admin
+    unless current_user.admin?
+      flash[:error] = "Insufficient privileges! Action available for administrator members only!"
+      redirect_to "/forbidden"
+    end
+  end
 end

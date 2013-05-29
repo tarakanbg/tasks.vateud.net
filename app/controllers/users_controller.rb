@@ -1,11 +1,17 @@
 class UsersController < ApplicationController
   before_filter :confirm_enabled
+  before_filter :confirm_admin, :only => [:enable, :disable, :staff, :destaff, :destroy]
 
   # GET /users
   # GET /users.json
   def index
-    @pagetitle = "Users List"
-    @users = User.all
+    if params[:staff] && params[:staff] == "true"
+      @pagetitle = "Staff Users List"
+      @users = User.staff
+    else
+      @pagetitle = "Regular Users List"
+      @users = User.nonstaff
+    end
 
     respond_to do |format|
       format.html # index.html.haml
@@ -17,8 +23,13 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @user = User.find(params[:id])
-    @pagetitle = "Active tasks for user #{@user.name}"
-    @tasks = @user.tasks.active.roots
+    if params[:archived] && params[:archived] == "true"    
+      @tasks = @user.tasks.inactive.order('updated_at DESC')
+      @pagetitle = "Archived tasks for user #{@user.name}"
+    else
+      @pagetitle = "Active tasks for user #{@user.name}"
+      @tasks = @user.tasks.active.roots.order('created_at DESC')
+    end
 
     respond_to do |format|
       format.html # show.html.haml
@@ -90,6 +101,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @user.enabled = true
     @user.save
+    UserMailer.enabled_email(@user).deliver
     redirect_to :back
   rescue ActionController::RedirectBackError
     redirect_to root_path
@@ -99,6 +111,24 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @user.enabled = false
     @user.save
+    redirect_to :back
+  rescue ActionController::RedirectBackError
+    redirect_to root_path
+  end
+
+  def staff
+    @user = User.find(params[:id])
+    @user.staff = true
+    @user.save    
+    redirect_to :back
+  rescue ActionController::RedirectBackError
+    redirect_to root_path
+  end
+
+  def destaff
+    @user = User.find(params[:id])
+    @user.staff = false
+    @user.save    
     redirect_to :back
   rescue ActionController::RedirectBackError
     redirect_to root_path

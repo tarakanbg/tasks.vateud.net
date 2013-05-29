@@ -6,5 +6,10 @@ class UserMailer < ActionMailer::Base
     @task = task
     mail(:to => emails, :subject => "New tasked assigned to you by VATEUD")
   end
+
+  def enabled_email(user)
+    @user = user
+    mail(:to => user.email, :subject => "VATEUD Tasks tracker account enabled")
+  end
 end
 

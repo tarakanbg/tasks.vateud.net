@@ -3,7 +3,7 @@
 .task-details.row
   .span3
     .task-label Created by:
-    .task-value= @task.author.name
+    .task-value= link_to @task.author.name, user_path(@task.author)
   .span3
     .task-label Created at:
     .task-value= @task.created_at
@@ -29,13 +29,22 @@
 = render :partial => "attachments"
 
 - if @task.has_children?
-  .task-details.row
-    .span12
-      .task-label Subtasks:
-      #tasks
-        %ul.tasks
-          - @task.children.each do |task|
-            = render :partial => 'task', :locals => { :task => task }
+  - if @task.children.active.count > 0
+    .task-details.row
+      .span12
+        .task-label Active Subtasks:
+        #tasks
+          %ul.tasks
+            - @task.children.active.order('created_at DESC').each do |task|
+              = render :partial => 'task', :locals => { :task => task }
+  - if @task.children.inactive.count > 0
+    .task-details.row
+      .span12
+        .task-label Archived Subtasks:
+        #arctasks
+          %ul.tasks
+            - @task.children.inactive.order('updated_at DESC').each do |task|
+              = render :partial => 'task', :locals => { :task => task }        
 
 .task-buttons.row
   = edit_button("big", @task)

@@ -1,13 +1,15 @@
 class TasksController < ApplicationController
 
   before_filter :confirm_enabled, :except => [:forbidden]
+  before_filter :confirm_admin, :only => [:destroy]
   # GET /tasks
   # GET /tasks.json
   def index
+    @user = current_user
     ord = get_order(params[:sort])
     if params[:my] && params[:my] == "true"
-      @search = current_user.tasks.roots.order('created_at DESC')
-      @pagetitle = "Tasks for user #{current_user.name}"
+      @search = @user.tasks.roots.order('created_at DESC')
+      @pagetitle = "Tasks for user #{@user.name}"
     else
       @search = Task.roots.order('created_at DESC')
       @pagetitle = "VATEUD Active Tasks"
@@ -32,6 +34,7 @@ class TasksController < ApplicationController
   def show
     @task = Task.find(params[:id])
     @pagetitle = "Task details: #{@task.name}"
+    @archived = true
 
     respond_to do |format|
       format.html # show.html.haml
@@ -94,7 +97,7 @@ class TasksController < ApplicationController
         if params[:commit] == 'Upload attachment'
           format.html { redirect_to new_attachment_path(:task => @task.id) , notice: 'Task was successfully updated.' }
         else
-          informed = @task.informed
+          @task.informed ? informed = @task.informed : informed = []
           uninformed = []       
           @task.users.each {|u| uninformed << u.id unless informed.include?(u.id)}
           if informed.count > 0
@@ -142,6 +145,10 @@ class TasksController < ApplicationController
     @task = Task.find(params[:id])
     @task.status_id = 6
     @task.save
+    @task.descendants.each do |child|
+      child.status_id = 6
+      child.save
+    end
     redirect_to :back
   rescue ActionController::RedirectBackError
     redirect_to root_path
@@ -169,6 +176,10 @@ class TasksController < ApplicationController
     @task = Task.find(params[:id])
     @task.status_id = 4
     @task.save
+    @task.descendants.each do |child|
+      child.status_id = 4
+      child.save
+    end
     redirect_to :back
   rescue ActionController::RedirectBackError
     redirect_to root_path

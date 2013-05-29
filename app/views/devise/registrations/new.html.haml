@@ -4,7 +4,10 @@
     = simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
       .inputs
         = f.input :email, :label => false, :placeholder => 'E-mail', :required => false, :autofocus => true
-        = f.input :name, :label => false, :placeholder => 'First and Last Name', :required => false
+        = f.input :name, :label => false, :placeholder => 'First and Last Name', :required => true
+        = f.input :vatsimid, :label => false, :placeholder => 'VATSIM ID', :required => true
+        = f.input :vacc, :label => false, :placeholder => 'vACC or Division', :required => true
+        = f.input :position, :label => false, :placeholder => 'Staff Position', :required => true
         = f.input :password, :label => false, :placeholder => 'Password', :required => false
         = f.input :password_confirmation, :label => false, :placeholder => 'Password Confirmation', :required => false
       

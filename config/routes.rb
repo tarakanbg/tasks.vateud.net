@@ -14,6 +14,8 @@ TasksVateudNet::Application.routes.draw do
   put 'tasks/complete/:id' => 'tasks#complete'
   put 'users/enable/:id' => 'users#enable'
   put 'users/disable/:id' => 'users#disable'
+  put 'users/staff/:id' => 'users#staff'
+  put 'users/destaff/:id' => 'users#destaff'
   get 'forbidden' => 'tasks#forbidden'
 
   # The priority is based upon order of creation:
