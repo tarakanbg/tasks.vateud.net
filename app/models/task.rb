@@ -19,7 +19,7 @@ class Task < ActiveRecord::Base
   scope :active,  where("status_id != 4 and status_id != 6")
   scope :inactive, where("status_id = 4 or status_id = 6")
   scope :completed, where("status_id = 4")
-  scope :cancelled, where("status_id = 6")
+  scope :cancelled, where("status_id = 6")  
 
   # before_save :update_informed
 

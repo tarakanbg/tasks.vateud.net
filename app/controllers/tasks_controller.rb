@@ -8,8 +8,13 @@ class TasksController < ApplicationController
     @user = current_user
     ord = get_order(params[:sort])
     if params[:my] && params[:my] == "true"
-      @search = @user.tasks.roots.order('created_at DESC')
-      @pagetitle = "Tasks for user #{@user.name}"
+      if @user.staff == false
+        @search = Task.where(:author_id => @user.id).roots.order('created_at DESC')
+        @pagetitle = "Tasks created by user #{@user.name}"
+      else
+        @search = @user.tasks.roots.order('created_at DESC')
+        @pagetitle = "Tasks for user #{@user.name}"
+      end
     else
       @search = Task.roots.order('created_at DESC')
       @pagetitle = "VATEUD Active Tasks"
@@ -62,6 +67,10 @@ class TasksController < ApplicationController
   def edit    
     @task = Task.find(params[:id])
     @pagetitle = "Edit Task: #{@task.name}"
+    unless (@task.status_id > 1 && @task.users.include?(current_user)) or (@task.status_id == 1 &&  @task.author == current_user)
+      flash[:error] = "Insufficient privileges! This Action is not available to you!"
+      redirect_to "/forbidden"
+    end
   end
 
   # POST /tasks
@@ -91,6 +100,11 @@ class TasksController < ApplicationController
   # PUT /tasks/1.json
   def update
     @task = Task.find(params[:id])
+
+    unless (@task.status_id > 1 && @task.users.include?(current_user)) or (@task.status_id == 1 &&  @task.author == current_user)
+      flash[:error] = "Insufficient privileges! This Action is not available to you!"
+      redirect_to "/forbidden"
+    end
 
     respond_to do |format|
       if @task.update_attributes(params[:task])
@@ -134,6 +148,12 @@ class TasksController < ApplicationController
 
   def accept
     @task = Task.find(params[:id])
+
+    unless (@task.status_id == 1 || @task.status_id == 6) && @task.users.include?(current_user)
+      flash[:error] = "Insufficient privileges! This Action is not available to you!"
+      redirect_to "/forbidden"
+    end
+
     @task.status_id = 2
     @task.save
     redirect_to :back
@@ -143,6 +163,12 @@ class TasksController < ApplicationController
 
   def cancel
     @task = Task.find(params[:id])
+
+    unless (@task.status_id > 1 && @task.status_id < 6 && @task.status_id != 4 && @task.users.include?(current_user)) or (@task.status_id == 1 && @task.author == current_user)
+      flash[:error] = "Insufficient privileges! This Action is not available to you!"
+      redirect_to "/forbidden"
+    end
+
     @task.status_id = 6
     @task.save
     @task.descendants.each do |child|
@@ -156,6 +182,12 @@ class TasksController < ApplicationController
 
   def progress
     @task = Task.find(params[:id])
+
+    unless (@task.status_id == 2 || @task.status_id == 5) && @task.users.include?(current_user)
+      flash[:error] = "Insufficient privileges! This action is not available to you!"
+      redirect_to "/forbidden"
+    end
+
     @task.status_id = 3
     @task.save
     redirect_to :back
@@ -165,6 +197,12 @@ class TasksController < ApplicationController
 
   def halt
     @task = Task.find(params[:id])
+
+    unless @task.status_id == 3 && @task.users.include?(current_user)
+      flash[:error] = "Insufficient privileges! This action is not available to you!"
+      redirect_to "/forbidden"
+    end
+
     @task.status_id = 5
     @task.save
     redirect_to :back
@@ -174,6 +212,12 @@ class TasksController < ApplicationController
 
   def complete
     @task = Task.find(params[:id])
+
+    unless @task.status_id > 0 && @task.status_id != 6 && @task.status_id != 4 && @task.users.include?(current_user)
+      flash[:error] = "Insufficient privileges! This action is not available to you!"
+      redirect_to "/forbidden"
+    end
+
     @task.status_id = 4
     @task.save
     @task.descendants.each do |child|

@@ -1,7 +1,7 @@
 class AttachmentsController < ApplicationController
 
   before_filter :confirm_enabled
-  before_filter :confirm_admin, :only => [:destroy]
+  # before_filter :confirm_admin, :only => [:destroy]
   
   # GET /attachments
   # GET /attachments.json
@@ -30,6 +30,10 @@ class AttachmentsController < ApplicationController
   def new
     @attachment = Attachment.new
     @task = Task.find(params[:task])
+    unless (@task.status_id > 1 && @task.status_id < 6 && @task.status_id != 4 && @task.users.include?(current_user)) or (@task.status_id == 1 && @task.author == current_user)
+      flash[:error] = "Insufficient privileges! This action is not available to you!"
+      redirect_to "/forbidden"
+    end
     @attachment.task_id = @task.id
     @pagetitle = "Add attachment to task #{@task.name}"
 
@@ -43,6 +47,10 @@ class AttachmentsController < ApplicationController
   def edit
     @attachment = Attachment.find(params[:id])
     @task = @attachment.task
+    unless (@task.status_id > 1 && @task.users.include?(current_user)) or (@task.status_id == 1 && @task.author == current_user)
+      flash[:error] = "Insufficient privileges! This action is not available to you!"
+      redirect_to "/forbidden"
+    end
     @pagetitle = "Edit attachment to task #{@task.name}"
     @edit = true
   end
@@ -84,6 +92,10 @@ class AttachmentsController < ApplicationController
   def destroy
     @attachment = Attachment.find(params[:id])
     @task = @attachment.task
+    unless (@task.status_id > 1 && @task.users.include?(current_user)) or (@task.status_id == 1 && @task.author == current_user)
+      flash[:error] = "Insufficient privileges! This action is not available to you!"
+      redirect_to "/forbidden"
+    end
     @attachment.destroy
 
     respond_to do |format|
