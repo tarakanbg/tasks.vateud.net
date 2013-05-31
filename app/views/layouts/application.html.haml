@@ -2,7 +2,7 @@
 %html
   %head
     %title VATEUD Tasks
-    <meta name="description" content="VATEUD Tasks Tool" />
+    <meta name="description" content="VATEUD Tasks Tracker" />
     <meta name="keywords" content="VATSIM, VATEUD, flight, simulation, atc, PTD, ATO, pilot training" /> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     = stylesheet_link_tag "application", :media => "all"
@@ -10,6 +10,8 @@
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+    = auto_discovery_link_tag(:rss, "/rss", {:title => "VATEUD New Tasks"})
+    = auto_discovery_link_tag(:rss, "/rss_completed", {:title => "VATEUD Completed Tasks"})
     = csrf_meta_tags
 
   %body.pull_top

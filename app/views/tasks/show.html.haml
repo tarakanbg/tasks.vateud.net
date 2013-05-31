@@ -60,3 +60,7 @@
   = link_to raw('<i class="icon-tasks"></i> Show All Tasks'), tasks_path, :class => "btn"
   = link_to raw('<i class="icon-home"></i> Show My Tasks'), tasks_path(:my => "true"), :class => "btn"
 
+- if @comments.count > 0
+  = render "comments"
+-if @task.author == current_user || current_user.staff?
+  = render "/comments/form"

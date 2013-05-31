@@ -10,7 +10,8 @@
     %th Created tasks
     %th Sign in count
     %th Last Sign in
-    %th Actions
+    - if current_user.admin?
+      %th Actions
 
   - @users.each do |user|
     %tr
@@ -24,14 +25,15 @@
       %td= user.authored_tasks.count
       %td= user.sign_in_count
       %td= user.last_sign_in_at.strftime("%d-%m-%Y") if user.last_sign_in_at
-      %td
-        - if current_user.admin? && user.enabled == false
-          = link_to raw('<i class="icon-ok"></i>'), {:action => :enable, :id => user.id}, :method => :put, :confirm => "Are you sure you want to enable this user?", :title => "Enable User"
-        - if current_user.admin? && user.enabled?
-          = link_to raw('<i class="icon-remove"></i>'), {:action => :disable, :id => user.id}, :method => :put, :confirm => "Are you sure you want to disable this user?", :title => "Disable User"
+      - if current_user.admin?
+        %td
+          - if user.enabled == false
+            = link_to raw('<i class="icon-ok"></i>'), {:action => :enable, :id => user.id}, :method => :put, :confirm => "Are you sure you want to enable this user?", :title => "Enable User"
+          - if user.enabled?
+            = link_to raw('<i class="icon-remove"></i>'), {:action => :disable, :id => user.id}, :method => :put, :confirm => "Are you sure you want to disable this user?", :title => "Disable User"
 
-        - if current_user.admin? && user.staff == false
-          = link_to raw('<i class=" icon-circle-arrow-up"></i>'), {:action => :staff, :id => user.id}, :method => :put, :confirm => "Are you sure you want to promote this user to staff member?", :title => "Promote to staff"
-        - if current_user.admin? && user.staff?
-          = link_to raw('<i class=" icon-circle-arrow-down"></i>'), {:action => :destaff, :id => user.id}, :method => :put, :confirm => "Are you sure you want to demote this user to regular member?", :title => "Demote from staff"
+          - if user.staff == false
+            = link_to raw('<i class=" icon-circle-arrow-up"></i>'), {:action => :staff, :id => user.id}, :method => :put, :confirm => "Are you sure you want to promote this user to staff member?", :title => "Promote to staff"
+          - if user.staff?
+            = link_to raw('<i class=" icon-circle-arrow-down"></i>'), {:action => :destaff, :id => user.id}, :method => :put, :confirm => "Are you sure you want to demote this user to regular member?", :title => "Demote from staff"
 

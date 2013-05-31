@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
 
-  before_filter :confirm_enabled, :except => [:forbidden]
+  before_filter :confirm_enabled, :except => [:forbidden, :rss, :rss_completed]
   before_filter :confirm_admin, :only => [:destroy]
   # GET /tasks
   # GET /tasks.json
@@ -40,6 +40,10 @@ class TasksController < ApplicationController
     @task = Task.find(params[:id])
     @pagetitle = "Task details: #{@task.name}"
     @archived = true
+    @comments = @task.comments
+    @comment = Comment.new
+    @comment.task_id = @task.id
+    @comment.user_id = current_user.id
 
     respond_to do |format|
       format.html # show.html.haml
@@ -233,6 +237,20 @@ class TasksController < ApplicationController
     @pagetitle = "Your account is pending approval"
     if current_user.enabled?
       redirect_to root_path
+    end
+  end
+
+  def rss    
+    @tasks = Task.order('created_at DESC').limit(20)
+    respond_to do |format|
+       format.rss { render :layout => false }
+    end
+  end
+
+  def rss_completed    
+    @tasks = Task.inactive.order('updated_at DESC').limit(20)
+    respond_to do |format|
+       format.rss { render :layout => false }
     end
   end
 private  

@@ -188,6 +188,7 @@ GEM
     warden (1.2.1)
       rack (>= 1.0)
     will_paginate (3.0.4)
+    yaml_db (0.2.3)
 
 PLATFORMS
   ruby
@@ -214,3 +215,4 @@ DEPENDENCIES
   thin (~> 1.5.1)
   uglifier (>= 1.0.3)
   will_paginate (~> 3.0.4)
+  yaml_db (~> 0.2.3)

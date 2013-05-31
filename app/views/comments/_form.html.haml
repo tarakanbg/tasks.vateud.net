@@ -1,0 +1,14 @@
+.section_header
+  %h4.comments Add comment:
+
+= simple_form_for(@comment) do |f| 
+  = f.error_notification
+
+  .form-inputs
+    .row
+      .span12
+        = f.input :text, :input_html => { :class => 'span6 wysihtml5', :rows => 5 }, :label => false
+
+    = f.hidden_field :task_id
+    = f.hidden_field :user_id    
+  = f.button :submit, :class => "btn btn-success" 

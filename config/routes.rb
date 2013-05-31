@@ -4,8 +4,9 @@ TasksVateudNet::Application.routes.draw do
   resources :tasks, :except => [:destroy]
   resources :users, :except => [:destroy, :new, :create]
   resources :attachments, :except => [:index, :show]
+  resources :comments, :except => [:index, :show, :edit, :update]
 
-  mount RailsAdmin::Engine => '/tadam', :as => 'rails_admin'
+  # mount RailsAdmin::Engine => '/tadam', :as => 'rails_admin'
 
   put 'tasks/accept/:id' => 'tasks#accept'
   put 'tasks/cancel/:id' => 'tasks#cancel'
@@ -17,6 +18,8 @@ TasksVateudNet::Application.routes.draw do
   put 'users/staff/:id' => 'users#staff'
   put 'users/destaff/:id' => 'users#destaff'
   get 'forbidden' => 'tasks#forbidden'
+  get 'rss' => 'tasks#rss'
+  get 'rss_completed' => 'tasks#rss_completed'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

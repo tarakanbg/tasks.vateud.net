@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   # attr_accessible :title, :body
 
   has_and_belongs_to_many :tasks
+  has_many :comments
 
   validates_presence_of :name, :email, :position, :vatsimid, :vacc
   validates :name, :length => { :minimum => 4 }

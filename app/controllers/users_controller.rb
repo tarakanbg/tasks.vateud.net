@@ -23,12 +23,22 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @user = User.find(params[:id])
-    if params[:archived] && params[:archived] == "true"    
-      @tasks = @user.tasks.inactive.order('updated_at DESC')
-      @pagetitle = "Archived tasks for user #{@user.name}"
+    if params[:archived] && params[:archived] == "true"
+      if current_user.staff?    
+        @pagetitle = "Archived tasks for user #{@user.name}"
+        @tasks = @user.tasks.inactive.order('updated_at DESC')
+      else
+        @pagetitle = "Archived tasks created by user #{@user.name}"
+        @tasks = Task.where(:author_id => @user.id).inactive.order('updated_at DESC')
+      end
     else
-      @pagetitle = "Active tasks for user #{@user.name}"
-      @tasks = @user.tasks.active.roots.order('created_at DESC')
+      if current_user.staff?
+        @pagetitle = "Active tasks for user #{@user.name}"
+        @tasks = @user.tasks.active.roots.order('created_at DESC')
+      else
+        @pagetitle = "Active tasks created by user #{@user.name}"
+        @tasks = Task.where(:author_id => @user.id).roots.order('created_at DESC')
+      end
     end
 
     respond_to do |format|
