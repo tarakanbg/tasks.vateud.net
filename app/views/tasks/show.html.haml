@@ -7,11 +7,14 @@
   .span3
     .task-label Created at:
     .task-value= @task.created_at
-  .span3
+  .span2
     .task-label Status:
     .task-value
       %span{:class => "label label-#{@task.status.css}"}= @task.status.name
-  .span3
+  .span2
+    .task-label Private:
+    .task-value= @task.private
+  .span2
     .task-label Due date:
     .task-value= @task.due_date
 .task-details.row

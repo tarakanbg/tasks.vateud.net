@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130531123902) do
+ActiveRecord::Schema.define(:version => 20130602112625) do
 
   create_table "attachments", :force => true do |t|
     t.string   "name"
@@ -60,13 +60,14 @@ ActiveRecord::Schema.define(:version => 20130531123902) do
     t.integer  "priority_id"
     t.date     "due_date"
     t.integer  "status_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
     t.integer  "lft"
     t.integer  "rgt"
     t.integer  "parent_id"
     t.integer  "depth"
     t.text     "informed"
+    t.boolean  "private",     :default => false
   end
 
   create_table "tasks_users", :force => true do |t|

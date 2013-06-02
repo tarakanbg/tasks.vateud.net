@@ -18,9 +18,11 @@
   - if task.has_children?
     %ul.nested_tasks
       - task.children.each do |child|
-        - if params[:archived] == "true" or @archived == true
-          = render :partial => 'tasks/task', :locals => { :task => child }
-        - else 
-          - if child.active?
+        - unless child.private? && current_user.staff == false
+          - if params[:archived] == "true" or @archived == true
             = render :partial => 'tasks/task', :locals => { :task => child }
+          - else 
+            - if child.active?
+              = render :partial => 'tasks/task', :locals => { :task => child }
+
 

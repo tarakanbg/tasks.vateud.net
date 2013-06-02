@@ -24,20 +24,40 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     if params[:archived] && params[:archived] == "true"
-      if current_user.staff?    
-        @pagetitle = "Archived tasks for user #{@user.name}"
-        @tasks = @user.tasks.inactive.order('updated_at DESC')
+      if @user.staff? 
+        if current_user.staff == false
+          @pagetitle = "Archived tasks for user #{@user.name}"
+          @tasks = @user.tasks.public.inactive.order('updated_at DESC')
+        else   
+          @pagetitle = "Archived tasks for user #{@user.name}"
+          @tasks = @user.tasks.inactive.order('updated_at DESC')
+        end
       else
-        @pagetitle = "Archived tasks created by user #{@user.name}"
-        @tasks = Task.where(:author_id => @user.id).inactive.order('updated_at DESC')
+        if current_user.staff == false
+          @pagetitle = "Archived tasks created by user #{@user.name}"
+          @tasks = Task.where(:author_id => @user.id).public.inactive.order('updated_at DESC')
+        else
+          @pagetitle = "Archived tasks created by user #{@user.name}"
+          @tasks = Task.where(:author_id => @user.id).inactive.order('updated_at DESC')
+        end
       end
     else
-      if current_user.staff?
-        @pagetitle = "Active tasks for user #{@user.name}"
-        @tasks = @user.tasks.active.roots.order('created_at DESC')
+      if @user.staff?
+        if current_user.staff == false
+          @pagetitle = "Active tasks for user #{@user.name}"
+          @tasks = @user.tasks.public.active.roots.order('created_at DESC')
+        else
+          @pagetitle = "Active tasks for user #{@user.name}"
+          @tasks = @user.tasks.active.roots.order('created_at DESC')
+        end
       else
-        @pagetitle = "Active tasks created by user #{@user.name}"
-        @tasks = Task.where(:author_id => @user.id).roots.order('created_at DESC')
+        if current_user.staff == false
+          @pagetitle = "Active tasks created by user #{@user.name}"
+          @tasks = Task.where(:author_id => @user.id).public.roots.order('created_at DESC')
+        else
+          @pagetitle = "Active tasks created by user #{@user.name}"
+          @tasks = Task.where(:author_id => @user.id).roots.order('created_at DESC')
+        end
       end
     end
 

@@ -79,4 +79,8 @@ module TasksHelper
     end
   end
 
+  def due_date_label
+    current_user.staff? ? "Due date" : "Proposed date"
+  end
+
 end

@@ -1,6 +1,6 @@
 class Task < ActiveRecord::Base
   attr_accessible :author_id, :description, :due_date, :name, :status_id, :user_ids,
-                  :parent_id, :lft, :rgt, :informed
+                  :parent_id, :lft, :rgt, :informed, :private
 
   serialize :informed                
   attr_reader :assignees
@@ -15,14 +15,23 @@ class Task < ActiveRecord::Base
   has_many :attachments, :dependent => :destroy
 
   validates_presence_of :name, :status_id, :due_date, :author_id
+  validate :not_past_date
 
   scope :roots, where(:parent_id => nil)
+  scope :private, where(:private => true)
+  scope :public, where(:private => false)
   scope :active,  where("status_id != 4 and status_id != 6")
   scope :inactive, where("status_id = 4 or status_id = 6")
   scope :completed, where("status_id = 4")
   scope :cancelled, where("status_id = 6")  
 
   # before_save :update_informed
+
+  def not_past_date
+    if self.due_date.past?
+      errors.add(:due_date, 'Cannot be past')
+    end
+  end
 
 
   def self.send_notifications(task, users)

@@ -16,12 +16,22 @@ class TasksController < ApplicationController
         @pagetitle = "Tasks for user #{@user.name}"
       end
     else
-      @search = Task.roots.order('created_at DESC')
-      @pagetitle = "VATEUD Active Tasks"
+      if @user.staff == false
+        @search = Task.roots.public.order('created_at DESC')
+        @pagetitle = "VATEUD Active Tasks"
+      else
+        @search = Task.roots.order('created_at DESC')
+        @pagetitle = "VATEUD Active Tasks"
+      end
     end
     if params[:archived] && params[:archived] == "true"
-      @search = Task.inactive.order('updated_at DESC')
-      @pagetitle = "VATEUD Archived Tasks"
+      if @user.staff == false
+        @search = Task.inactive.public.order('updated_at DESC')
+        @pagetitle = "VATEUD Archived Tasks"
+      else
+        @search = Task.inactive.order('updated_at DESC')
+        @pagetitle = "VATEUD Archived Tasks"
+      end
     else
       @search = @search.active
     end
@@ -36,8 +46,12 @@ class TasksController < ApplicationController
 
   # GET /tasks/1
   # GET /tasks/1.json
-  def show
+  def show    
     @task = Task.find(params[:id])
+    if @task.private? && @task.author != current_user && current_user.staff == false
+      flash[:error] = "Insufficient privileges! This Action is not available to you!"
+      return redirect_to "/forbidden"
+    end
     @pagetitle = "Task details: #{@task.name}"
     @archived = true
     @comments = @task.comments
@@ -73,7 +87,7 @@ class TasksController < ApplicationController
     @pagetitle = "Edit Task: #{@task.name}"
     unless (@task.status_id > 1 && @task.users.include?(current_user)) or (@task.status_id == 1 &&  @task.author == current_user)
       flash[:error] = "Insufficient privileges! This Action is not available to you!"
-      redirect_to "/forbidden"
+      return redirect_to "/forbidden"
     end
   end
 
@@ -107,7 +121,7 @@ class TasksController < ApplicationController
 
     unless (@task.status_id > 1 && @task.users.include?(current_user)) or (@task.status_id == 1 &&  @task.author == current_user)
       flash[:error] = "Insufficient privileges! This Action is not available to you!"
-      redirect_to "/forbidden"
+      return redirect_to "/forbidden"
     end
 
     respond_to do |format|
@@ -155,7 +169,7 @@ class TasksController < ApplicationController
 
     unless (@task.status_id == 1 || @task.status_id == 6) && @task.users.include?(current_user)
       flash[:error] = "Insufficient privileges! This Action is not available to you!"
-      redirect_to "/forbidden"
+      return redirect_to "/forbidden"
     end
 
     @task.status_id = 2
@@ -170,7 +184,7 @@ class TasksController < ApplicationController
 
     unless (@task.status_id > 1 && @task.status_id < 6 && @task.status_id != 4 && @task.users.include?(current_user)) or (@task.status_id == 1 && @task.author == current_user)
       flash[:error] = "Insufficient privileges! This Action is not available to you!"
-      redirect_to "/forbidden"
+      return redirect_to "/forbidden"
     end
 
     @task.status_id = 6
@@ -189,7 +203,7 @@ class TasksController < ApplicationController
 
     unless (@task.status_id == 2 || @task.status_id == 5) && @task.users.include?(current_user)
       flash[:error] = "Insufficient privileges! This action is not available to you!"
-      redirect_to "/forbidden"
+      return redirect_to "/forbidden"
     end
 
     @task.status_id = 3
@@ -204,7 +218,7 @@ class TasksController < ApplicationController
 
     unless @task.status_id == 3 && @task.users.include?(current_user)
       flash[:error] = "Insufficient privileges! This action is not available to you!"
-      redirect_to "/forbidden"
+      return redirect_to "/forbidden"
     end
 
     @task.status_id = 5
@@ -219,7 +233,7 @@ class TasksController < ApplicationController
 
     unless @task.status_id > 0 && @task.status_id != 6 && @task.status_id != 4 && @task.users.include?(current_user)
       flash[:error] = "Insufficient privileges! This action is not available to you!"
-      redirect_to "/forbidden"
+      return redirect_to "/forbidden"
     end
 
     @task.status_id = 4
@@ -241,18 +255,19 @@ class TasksController < ApplicationController
   end
 
   def rss    
-    @tasks = Task.order('created_at DESC').limit(20)
+    @tasks = Task.public.order('created_at DESC').limit(20)
     respond_to do |format|
        format.rss { render :layout => false }
     end
   end
 
   def rss_completed    
-    @tasks = Task.inactive.order('updated_at DESC').limit(20)
+    @tasks = Task.public.inactive.order('updated_at DESC').limit(20)
     respond_to do |format|
        format.rss { render :layout => false }
     end
   end
+  
 private  
 
   def get_order(param)

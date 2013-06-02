@@ -5,11 +5,13 @@
       .span8
         = f.input :name, :input_html => { :class => 'span7' }
       .span4
-        = f.input :due_date, as: :string, :input_html => { :class => 'span2', :data => {:behaviour => 'datepicker'}}
+        = f.input :due_date, as: :string, :input_html => { :class => 'span2', :data => {:behaviour => 'datepicker'}}, :label => due_date_label
 
     .row
-      .span10
+      .span8
         = f.association :users, :collection => User.where(:staff => true), input_html: { class: 'multiselect' }, :label => "Assignees", :label_method => :name_position
+      .span3
+        = f.input :private, :label => "Private (visible to staff only)"  
         
     .row
       .span8
