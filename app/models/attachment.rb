@@ -3,6 +3,8 @@ class Attachment < ActiveRecord::Base
                   :upload_file_size, :upload_updated_at
   has_attached_file :upload
 
+  has_paper_trail
+
   belongs_to :task
 
   validates :upload, attachment_presence: true, presence: true

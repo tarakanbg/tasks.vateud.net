@@ -1,9 +1,12 @@
 %li
-  .name= link_to (task.name), task_path(task)
+  .name= link_to (trim_string(task.name, 45)), task_path(task)
   .status
     %span{:class => "label label-#{task.status.css}" }= task.status.name
-  .due_date= task.due_date
-  .assignees= task.assignees
+  - if current_user.staff?  
+    .private= private_icon(task)  
+  .due_date
+    %span{:class => "#{task.due_date_style}"}= task.due_date
+  .assignees= trim_string(task.assignees, 38)
   .controls
     = link_to raw('<i class="icon-tasks"></i>'), task_path(task), :title => "Task Details"
     = edit_button("mini", task)

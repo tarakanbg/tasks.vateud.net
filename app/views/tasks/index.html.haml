@@ -5,6 +5,8 @@
 .tasks_legend
   .name Name
   .status Status
+  - if current_user.staff?
+    .private Private
   .due_date Due date
   .assignees Assignees
   .controls Actions

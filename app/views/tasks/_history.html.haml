@@ -1,0 +1,18 @@
+.section_header
+  %h3.comments Task history
+
+.row
+  .span12
+    %ul
+      - for version in @versions  
+        %li
+          %span.bold= version.event.titlecase
+          by
+          %span.bold.italic= User.find(version.whodunnit).name
+          at
+          %span.muted= version.created_at
+          ="=>"
+          %span
+            %code= version.changeset
+
+     

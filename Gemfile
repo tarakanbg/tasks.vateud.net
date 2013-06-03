@@ -47,16 +47,22 @@ gem "yaml_db", "~> 0.2.3", :group => :development
 
 gem "pg", "~> 0.15.0"
 
-gem "rails_admin", "~> 0.4.7"
+gem "bootstrap-sass", "~> 2.3.1.3"
+gem "font-awesome-rails", "~> 3.1.1.2"
+gem "haml", "~> 4.0.3"
+gem "kaminari", "~> 0.14.1"
+
+# gem "rails_admin", "~> 0.4.9"
+# gem "safe_yaml", "~> 0.9.2"
 
 gem "devise"
-gem "paper_trail", "~> 2.7.1"
+gem "paper_trail", "~> 2.7.2"
 
 gem "simple_form", "~> 2.1.0"
 gem "will_paginate", "~> 3.0.4"
 gem "bootstrap-will_paginate", "~> 0.0.9"
 gem "meta_search", "~> 1.1.3"
-gem 'jquery-ui-rails'
+gem "jquery-ui-rails", "~> 4.0.3"
 
 gem "awesome_nested_set", "~> 2.1.6"
 gem "bootstrap-wysihtml5-rails", :git => 'git://github.com/tarakanbg/bootstrap-wysihtml5-rails.git'

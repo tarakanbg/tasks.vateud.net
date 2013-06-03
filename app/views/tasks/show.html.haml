@@ -16,7 +16,8 @@
     .task-value= @task.private
   .span2
     .task-label Due date:
-    .task-value= @task.due_date
+    .task-value
+      %span{:class => "#{@task.due_date_style}"}= @task.due_date
 .task-details.row
   .span6
     .task-label Assignees:
@@ -67,3 +68,6 @@
   = render "comments"
 -if @task.author == current_user || current_user.staff?
   = render "/comments/form"
+
+- if @versions.count > 0
+  = render "history"  

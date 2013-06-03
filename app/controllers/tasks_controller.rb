@@ -58,6 +58,7 @@ class TasksController < ApplicationController
     @comment = Comment.new
     @comment.task_id = @task.id
     @comment.user_id = current_user.id
+    @versions = @task.versions.reorder('created_at DESC')
 
     respond_to do |format|
       format.html # show.html.haml
@@ -171,7 +172,8 @@ class TasksController < ApplicationController
       flash[:error] = "Insufficient privileges! This Action is not available to you!"
       return redirect_to "/forbidden"
     end
-
+    
+    @task.due_date = Date.today if @task.due_date.past?
     @task.status_id = 2
     @task.save
     redirect_to :back
@@ -187,6 +189,7 @@ class TasksController < ApplicationController
       return redirect_to "/forbidden"
     end
 
+    @task.due_date = Date.today if @task.due_date.past?
     @task.status_id = 6
     @task.save
     @task.descendants.each do |child|
@@ -206,6 +209,7 @@ class TasksController < ApplicationController
       return redirect_to "/forbidden"
     end
 
+    @task.due_date = Date.today if @task.due_date.past?
     @task.status_id = 3
     @task.save
     redirect_to :back
@@ -221,6 +225,7 @@ class TasksController < ApplicationController
       return redirect_to "/forbidden"
     end
 
+    @task.due_date = Date.today if @task.due_date.past?
     @task.status_id = 5
     @task.save
     redirect_to :back
@@ -236,6 +241,7 @@ class TasksController < ApplicationController
       return redirect_to "/forbidden"
     end
 
+    @task.due_date = Date.today if @task.due_date.past?
     @task.status_id = 4
     @task.save
     @task.descendants.each do |child|

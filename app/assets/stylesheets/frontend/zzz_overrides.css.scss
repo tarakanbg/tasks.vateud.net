@@ -6,6 +6,7 @@
 #footer .recent_posts .post {margin-bottom: 20px;}
 a.btn > ins.jstree-icon {  display:none !important; }
 div.controls ins.jstree-icon {  display:none !important; }
+div.private ins.jstree-icon {  display:none !important; }
 li.jstree-open a ins.jstree-icon {  background-image: url(image_path('mono-icons/folder16.png')); background-position: 0px 0px; }
 li.jstree-closed a ins.jstree-icon {  background-image: url(image_path('mono-icons/folder16.png')); background-position: 0px 0px; }
 li.jstree-leaf a ins.jstree-icon {  background-image: url(image_path('mono-icons/task16.png')); background-position: 0px 0px; }

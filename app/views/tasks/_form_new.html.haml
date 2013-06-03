@@ -3,7 +3,7 @@
   .form-inputs.task-form
     .row
       .span8
-        = f.input :name, :input_html => { :class => 'span7' }
+        = f.input :name, :input_html => { :class => 'span7' }, :label => "Task name"
       .span4
         = f.input :due_date, as: :string, :input_html => { :class => 'span2', :data => {:behaviour => 'datepicker'}}, :label => due_date_label
 

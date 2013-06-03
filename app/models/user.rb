@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
                   :vatsimid, :vacc
   # attr_accessible :title, :body
 
+  has_paper_trail
+
   has_and_belongs_to_many :tasks
   has_many :comments
 

@@ -83,4 +83,16 @@ module TasksHelper
     current_user.staff? ? "Due date" : "Proposed date"
   end
 
+  def private_icon(task)
+    if task.private?
+      link_to raw('<i class="icon-eye-open"></i>'), "#", :title => "This task is private (staff only)"  
+    end
+  end
+
+  def trim_string(string, length)
+    result = string[0..length]
+    result += "..." if string.length > length 
+    result   
+  end
+
 end

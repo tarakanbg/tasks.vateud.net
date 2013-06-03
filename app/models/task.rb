@@ -4,8 +4,10 @@ class Task < ActiveRecord::Base
 
   serialize :informed                
   attr_reader :assignees
+  attr_reader :due_date_style
 
   acts_as_nested_set
+  has_paper_trail
 
   belongs_to :author, :class_name => "User", :foreign_key => "author_id"
   belongs_to :status
@@ -63,5 +65,12 @@ class Task < ActiveRecord::Base
     end
   end
 
+  def due_date_style
+    if self.due_date && self.due_date.past?
+      "text-error"
+    elsif self.due_date && self.due_date < 7.days.from_now.to_date
+      "text-warning"
+    end
+  end
 
 end
