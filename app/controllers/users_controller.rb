@@ -23,6 +23,7 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @user = User.find(params[:id])
+    @versions = Version.where(:whodunnit => @user.id.to_s, :item_type => ["Task", "User", "Attachment"]).reorder('created_at DESC')
     if params[:archived] && params[:archived] == "true"
       if @user.staff? 
         if current_user.staff == false

@@ -66,10 +66,10 @@ class Task < ActiveRecord::Base
   end
 
   def due_date_style
-    if self.due_date && self.due_date.past?
+    if self.due_date && self.due_date.past? && self.active?
       "text-error"
-    elsif self.due_date && self.due_date < 7.days.from_now.to_date
-      "text-warning"
+    elsif self.due_date && self.due_date < 7.days.from_now.to_date && self.active?
+      "text-warning"    
     end
   end
 

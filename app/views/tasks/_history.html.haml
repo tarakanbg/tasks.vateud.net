@@ -6,10 +6,10 @@
     %ul
       - for version in @versions  
         %li
-          %span.bold= version.event.titlecase
+          %span.bold= version.event.titlecase + "d "
           by
-          %span.bold.italic= User.find(version.whodunnit).name
-          at
+          %span.bold= link_to User.find(version.whodunnit).name, user_path(version.whodunnit)
+          on
           %span.muted= version.created_at
           ="=>"
           %span

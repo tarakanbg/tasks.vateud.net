@@ -3,6 +3,25 @@
 .active_switch
   = active_inactive_switch
 
+.task-details.row
+  .span2
+    .task-label Staff:
+    .task-value= @user.staff
+  .span3
+    .task-label Position:
+    .task-value= @user.position
+  .span2
+    .task-label vACC:
+    .task-value= @user.vacc
+  .span2
+    .task-label VATSIM ID:
+    .task-value= @user.vatsimid  
+  .span2
+    .task-label Email:
+    .task-value= mail_to @user.email
+  
+.separator
+  
 .tasks_legend
   .name Name
   .status Status
@@ -13,3 +32,23 @@
   %ul.tasks
     - @tasks.each do |task|
       = render :partial => 'tasks/task', :locals => { :task => task }
+
+.separator
+
+.section_header
+  %h3.comments Latest actions
+
+.row
+  .span12
+    %ul
+      - for version in @versions  
+        %li
+          %span.bold= version.event.titlecase + "d: "          
+          %span.bold
+            = history_type(version)            
+          on
+          %span.muted= version.created_at
+          ="=>"
+          %span
+            %code= version.changeset
+
