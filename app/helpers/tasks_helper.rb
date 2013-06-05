@@ -80,7 +80,7 @@ module TasksHelper
   end
 
   def due_date_label
-    current_user.staff? ? "Due date" : "Proposed date"
+    current_user.staff? ? "Due date" : "Proposed due date"
   end
 
   def private_icon(task)

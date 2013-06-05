@@ -1,5 +1,5 @@
 %li
-  .name= link_to (trim_string(task.name, 45)), task_path(task)
+  .name= link_to (trim_string(task.name, 50)), task_path(task)
   .status
     %span{:class => "label label-#{task.status.css}" }= task.status.name
   - if current_user.staff?  
