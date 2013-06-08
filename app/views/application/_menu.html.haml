@@ -16,6 +16,7 @@
           %li= link_to raw('<i class="icon-tasks icon-white"></i> MY TASKS'), root_path(:my => "true")
           %li= link_to raw('<i class="icon-folder-open icon-white"></i> ALL TASKS'), tasks_path
           %li= link_to raw('<i class="icon-lock icon-white"></i> ARCHIVE'), tasks_path(:archived => "true")
+          %li= link_to raw('<i class="icon-text-width icon-white"></i> COMMENTS'), comments_path
 
           %li.dropdown
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">

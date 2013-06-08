@@ -10,6 +10,16 @@ module TasksHelper
     end
   end
 
+  def edit_button_comment(size, comment)    
+    if comment.user == current_user
+      if size == "big"
+        link_to raw('<i class="icon-edit icon-white"></i> Edit'), edit_comment_path(comment), :title => "Edit comment", :class => "btn btn-primary"
+      elsif size == "mini"
+        link_to raw('<i class="icon-edit"></i>'), edit_comment_path(comment), :title => "Edit comment"  
+      end  
+    end
+  end
+
   def attachment_button(size, task)    
     if (task.status_id > 1 && task.status_id < 6 && task.status_id != 4 && task.users.include?(current_user)) or (task.status_id == 1 && task.author == current_user)
       if size == "big"
@@ -75,6 +85,16 @@ module TasksHelper
         link_to raw('<i class="icon-remove icon-white"></i> Mark Cancelled'), {:action => :cancel, :id => task.id}, :method => :put, :confirm => "Are you sure you want to cancel this task?", :title => "Cancel task", :class => "btn btn-danger"
       elsif size == "mini"
         link_to raw('<i class="icon-remove"></i>'), {:controller => :tasks, :action => :cancel, :id => task.id}, :method => :put, :confirm => "Are you sure you want to cancel this task?", :title => "Cancel Task"  
+      end  
+    end
+  end
+
+  def delete_button_comment(size, comment)    
+    if comment.user == current_user
+      if size == "big"
+        link_to raw('<i class="icon-remove icon-white"></i> Delete comment'), {:controller => :comments, :action => :destroy, :id => comment.id}, :method => :delete, :confirm => "Are you sure you want to delete this comment?", :title => "Delete Comment", :class => "btn btn-danger"
+      elsif size == "mini"
+        link_to raw('<i class="icon-remove"></i>'), {:controller => :comments, :action => :destroy, :id => comment.id}, :method => :delete, :confirm => "Are you sure you want to delete this comment?", :title => "Delete Comment"   
       end  
     end
   end

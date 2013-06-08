@@ -5,4 +5,10 @@ class Comment < ActiveRecord::Base
   has_paper_trail
 
   validates_presence_of :task_id, :user_id, :text
+
+  attr_reader :private
+
+  def private?
+    self.task.private? ? true : false    
+  end
 end

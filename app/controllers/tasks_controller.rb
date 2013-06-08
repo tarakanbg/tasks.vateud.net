@@ -36,7 +36,7 @@ class TasksController < ApplicationController
       @search = @search.active
     end
     @search = Task.search(params[:search]) if params[:search]
-    @tasks = @search.paginate(:page => params[:page], :per_page => 20).order(ord)
+    @tasks = @search.paginate(:page => params[:page], :per_page => 25).order(ord)
 
     respond_to do |format|
       format.html # index.html.haml

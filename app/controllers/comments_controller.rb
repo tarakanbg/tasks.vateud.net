@@ -4,7 +4,9 @@ class CommentsController < ApplicationController
   # GET /comments
   # GET /comments.json
   def index
-    @comments = Comment.all
+    @comments = Comment.order('created_at DESC')
+    @comments = @comments.paginate(:page => params[:page], :per_page => 20)
+    @pagetitle = "Latest comments"
 
     respond_to do |format|
       format.html # index.html.erb
@@ -37,6 +39,10 @@ class CommentsController < ApplicationController
   # GET /comments/1/edit
   def edit
     @comment = Comment.find(params[:id])
+    unless @comment.user == current_user
+      flash[:error] = "Insufficient privileges! This action is not available to you!"
+      return redirect_to "/forbidden"
+    end
   end
 
   # POST /comments
@@ -65,10 +71,14 @@ class CommentsController < ApplicationController
   # PUT /comments/1.json
   def update
     @comment = Comment.find(params[:id])
+    unless @comment.user == current_user
+      flash[:error] = "Insufficient privileges! This action is not available to you!"
+      return redirect_to "/forbidden"
+    end
 
     respond_to do |format|
       if @comment.update_attributes(params[:comment])
-        format.html { redirect_to @comment, notice: 'Comment was successfully updated.' }
+        format.html { redirect_to task_path(@comment.task), notice: 'Comment was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -81,11 +91,16 @@ class CommentsController < ApplicationController
   # DELETE /comments/1.json
   def destroy
     @comment = Comment.find(params[:id])
+
+    unless @comment.user == current_user
+      flash[:error] = "Insufficient privileges! This action is not available to you!"
+      return redirect_to "/forbidden"
+    end
+
     @comment.destroy
 
-
     respond_to do |format|
-      format.html { redirect_to task_url(@comment.task) }
+      format.html { redirect_to :back }
       format.json { head :no_content }
     end
   end

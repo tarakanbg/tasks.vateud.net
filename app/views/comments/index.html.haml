@@ -1,0 +1,27 @@
+%table.comments
+  %tr
+    %th.comment_user User
+    %th.comment_date Date
+    - if current_user.staff?
+      %th.comment_private Private
+    %th.comment_task Task
+    %th.comment_comment Comment
+    %th.comment_controls Actions
+
+  - @comments.each do |comment|
+    - unless comment.private? && current_user.staff == false && comment.task.author != current_user
+      %tr
+        %td.comment_user= link_to comment.user.name, user_path(comment.user)
+        %td.comment_date= comment.created_at
+        - if current_user.staff?
+          %td.comment_private= private_icon(comment) 
+        %td.comment_task= link_to (trim_string(comment.task.name, 35)), task_path(comment.task)
+        %td.comment_comment= raw(trim_string(comment.text, 70))
+        %td.comment_controls
+          = link_to raw('<i class="icon-tasks"></i>'), task_path(comment.task), :title => "Show comment"
+          = edit_button_comment("mini", comment)          
+          = delete_button_comment("mini", comment)
+
+= will_paginate @comments
+
+/ = render :partial => "search_form"

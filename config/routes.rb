@@ -4,7 +4,7 @@ TasksVateudNet::Application.routes.draw do
   resources :tasks, :except => [:destroy]
   resources :users, :except => [:destroy, :new, :create]
   resources :attachments, :except => [:index, :show]
-  resources :comments, :except => [:index, :show, :edit, :update]
+  resources :comments, :except => [:show]
 
   # mount RailsAdmin::Engine => '/tadam', :as => 'rails_admin'
 
