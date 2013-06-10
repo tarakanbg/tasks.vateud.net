@@ -89,6 +89,16 @@ module TasksHelper
     end
   end
 
+  def delete_button(size, task)    
+    if current_user.admin?
+      if size == "big"
+        link_to raw('<i class="icon-trash icon-white"></i> Delete task!'), {:action => :destroy, :id => task.id}, :method => :delete, :confirm => "Are you sure you want to DELETE this task? This action is non-reversible and you may consider canceling the task instead!", :title => "Delete task", :class => "btn btn-danger"
+      elsif size == "mini"
+        link_to raw('<i class="icon-trash"></i>'), {:controller => :tasks, :action => :destroy, :id => task.id}, :method => :delete, :confirm => "Are you sure you want to DELETE this task? This action is non-reversible and you may consider canceling the task instead!", :title => "Delete Task"  
+      end  
+    end
+  end
+
   def delete_button_comment(size, comment)    
     if comment.user == current_user
       if size == "big"

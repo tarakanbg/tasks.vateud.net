@@ -13,7 +13,7 @@ A new task has been assigned to you by VATEUD.
   Description: <%= raw(@task.description) %>
       
 
-You can check and manage this task at http://tasks.vateud.net
+You can check and manage this task at <%= URI.join(root_url, task_path(@task)) %>
 
 Good luck and have a great day!
 

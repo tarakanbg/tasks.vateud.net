@@ -1,7 +1,7 @@
 TasksVateudNet::Application.routes.draw do
 
   devise_for :users
-  resources :tasks, :except => [:destroy]
+  resources :tasks
   resources :users, :except => [:destroy, :new, :create]
   resources :attachments, :except => [:index, :show]
   resources :comments, :except => [:show]
@@ -20,6 +20,7 @@ TasksVateudNet::Application.routes.draw do
   get 'forbidden' => 'tasks#forbidden'
   get 'rss' => 'tasks#rss'
   get 'rss_completed' => 'tasks#rss_completed'
+  get 'rss_comments' => 'tasks#rss_comments'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

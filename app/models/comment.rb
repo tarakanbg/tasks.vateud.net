@@ -11,4 +11,11 @@ class Comment < ActiveRecord::Base
   def private?
     self.task.private? ? true : false    
   end
+
+  def self.rss
+    visible = []
+    comments = Comment.order('created_at DESC').limit(25)
+    comments.each {|c| visible << c unless c.private? }
+    visible
+  end
 end
