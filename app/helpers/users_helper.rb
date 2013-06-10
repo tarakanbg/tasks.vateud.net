@@ -33,6 +33,12 @@ module UsersHelper
       "Task #{version.item_id}"
   end
 
+  def history_comment(version)       
+    link_to "Comment for Task #{Comment.find(version.item_id).task_id}", task_path(Comment.find(version.item_id).task_id)
+    rescue ActiveRecord::RecordNotFound
+      "Comment #{version.item_id}"
+  end
+
   def history_type(version)
     if version.item_type == "Task"
       history_task(version)
@@ -40,6 +46,8 @@ module UsersHelper
       history_user(version)
     elsif version.item_type == "Attachment"
       history_attachment(version)
+    elsif version.item_type == "Comment"
+      history_comment(version)  
     end
   end
   

@@ -59,6 +59,8 @@ class TasksController < ApplicationController
     @comment.task_id = @task.id
     @comment.user_id = current_user.id
     @versions = @task.versions.reorder('created_at DESC')
+    @task.comments.each {|c| @versions += c.versions.order('created_at DESC') }
+    # @versions = @versions.order('created_at DESC')
 
     respond_to do |format|
       format.html # show.html.haml
