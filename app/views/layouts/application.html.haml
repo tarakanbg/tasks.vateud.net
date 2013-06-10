@@ -10,8 +10,8 @@
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    = auto_discovery_link_tag(:rss, "/rss.rss", {:title => "VATEUD New Tasks"})
-    = auto_discovery_link_tag(:rss, "/rss_completed.rss", {:title => "VATEUD Completed Tasks"})
+    = auto_discovery_link_tag(:rss, "http://feeds.feedburner.com/VateudNewTasks", {:title => "VATEUD New Tasks"})
+    = auto_discovery_link_tag(:rss, "http://feeds.feedburner.com/VateudCompletedTasks", {:title => "VATEUD Completed Tasks"})
     = auto_discovery_link_tag(:rss, "/rss_comments.rss", {:title => "VATEUD Latest Task Comments"})
     = csrf_meta_tags
 
