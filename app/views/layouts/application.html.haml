@@ -12,7 +12,7 @@
     <![endif]-->
     = auto_discovery_link_tag(:rss, "http://feeds.feedburner.com/VateudNewTasks", {:title => "VATEUD New Tasks"})
     = auto_discovery_link_tag(:rss, "http://feeds.feedburner.com/VateudCompletedTasks", {:title => "VATEUD Completed Tasks"})
-    = auto_discovery_link_tag(:rss, "/rss_comments.rss", {:title => "VATEUD Latest Task Comments"})
+    = auto_discovery_link_tag(:rss, "http://feeds.feedburner.com/VateudLatestComments", {:title => "VATEUD Latest Task Comments"})
     = csrf_meta_tags
 
   %body.pull_top
