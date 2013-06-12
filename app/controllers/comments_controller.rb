@@ -51,7 +51,7 @@ class CommentsController < ApplicationController
     @comment = Comment.new(params[:comment])
     @task = @comment.task
 
-    unless @task.author == current_user || current_user.staff?
+    if @task.private? && current_user.staff == false
       flash[:error] = "Insufficient privileges! This Action is not available to you!"
       redirect_to "/forbidden"
     end

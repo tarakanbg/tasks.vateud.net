@@ -67,8 +67,8 @@
 
 - if @comments.count > 0
   = render "comments"
--if @task.author == current_user || current_user.staff?
-  = render "/comments/form"
+/ -if @task.author == current_user || current_user.staff?
+= render "/comments/form"
 
 - if @versions.count > 0
   = render "history"  
