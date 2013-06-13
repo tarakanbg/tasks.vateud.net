@@ -1,0 +1,22 @@
+*This is an automated email message, please do not reply!*
+    
+Dear <%= @task.author.name %>,
+
+A task you delegated within the VATEUD task system has changed its status.
+
+Task details:
+
+Name: <%= @task.name %>
+Status: <%= @task.status.name %>
+==================================
+
+
+Due date: <%= @task.due_date %>
+Assignees: <%= @task.assignees %>
+Description: <%= raw(@task.description) %>
+      
+You can check and comment on this task at <%= URI.join(root_url, task_path(@task)) %>
+
+Good luck and have a great day!
+
+*The VATEUD Web Services Team*

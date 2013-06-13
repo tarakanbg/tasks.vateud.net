@@ -28,12 +28,19 @@ class Task < ActiveRecord::Base
   scope :cancelled, where("status_id = 6")  
 
   # before_save :update_informed
+  # after_save :email_author
 
   def not_past_date
     if self.due_date.past?
       errors.add(:due_date, 'Cannot be past')
     end
   end
+
+  # def email_author
+    # if self.status_id_changed? && self.users.include?(self.author) == false
+    #   UserMailer.author_status_email(self).deliver
+    # end 
+  # end
 
 
   def self.send_notifications(task, users)

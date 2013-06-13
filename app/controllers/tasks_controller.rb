@@ -178,6 +178,7 @@ class TasksController < ApplicationController
     @task.due_date = Date.today if @task.due_date.past?
     @task.status_id = 2
     @task.save
+    email_author(@task)
     redirect_to :back
   rescue ActionController::RedirectBackError
     redirect_to root_path
@@ -197,7 +198,9 @@ class TasksController < ApplicationController
     @task.descendants.each do |child|
       child.status_id = 6
       child.save
+      email_author(child)
     end
+    email_author(@task)
     redirect_to :back
   rescue ActionController::RedirectBackError
     redirect_to root_path
@@ -214,6 +217,7 @@ class TasksController < ApplicationController
     @task.due_date = Date.today if @task.due_date.past?
     @task.status_id = 3
     @task.save
+    email_author(@task)
     redirect_to :back
   rescue ActionController::RedirectBackError
     redirect_to root_path
@@ -230,6 +234,7 @@ class TasksController < ApplicationController
     @task.due_date = Date.today if @task.due_date.past?
     @task.status_id = 5
     @task.save
+    email_author(@task)
     redirect_to :back
   rescue ActionController::RedirectBackError
     redirect_to root_path
@@ -249,7 +254,9 @@ class TasksController < ApplicationController
     @task.descendants.each do |child|
       child.status_id = 4
       child.save
+      email_author(child)
     end
+    email_author(@task)
     redirect_to :back
   rescue ActionController::RedirectBackError
     redirect_to root_path
@@ -292,5 +299,11 @@ private
       else
        "id DESC"
     end
+  end
+
+  def email_author(task)
+    unless task.users.include?(task.author)
+      UserMailer.author_status_email(task).deliver
+    end 
   end
 end

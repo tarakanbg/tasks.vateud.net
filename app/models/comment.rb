@@ -6,10 +6,20 @@ class Comment < ActiveRecord::Base
 
   validates_presence_of :task_id, :user_id, :text
 
+  after_create :email_assignees
+
   attr_reader :private
 
   def private?
     self.task.private? ? true : false    
+  end
+
+  def email_assignees
+    recipients = self.task.users
+    recipients.delete(self.user) if recipients.include?(self.user)
+    emails = []
+    recipients.each {|u| emails << u.email}    
+    UserMailer.comment_assignees_email(self, emails).deliver if emails.count > 0
   end
 
   def self.rss
