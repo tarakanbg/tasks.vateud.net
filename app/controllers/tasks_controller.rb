@@ -88,7 +88,7 @@ class TasksController < ApplicationController
   def edit    
     @task = Task.find(params[:id])
     @pagetitle = "Edit Task: #{@task.name}"
-    unless (@task.status_id > 1 && @task.users.include?(current_user)) or (@task.status_id == 1 &&  @task.author == current_user)
+    unless (@task.status_id > 1 && @task.users.include?(current_user)) or (@task.status_id == 1 &&  @task.author == current_user) or current_user.admin?
       flash[:error] = "Insufficient privileges! This Action is not available to you!"
       return redirect_to "/forbidden"
     end
@@ -122,7 +122,7 @@ class TasksController < ApplicationController
   def update
     @task = Task.find(params[:id])
 
-    unless (@task.status_id > 1 && @task.users.include?(current_user)) or (@task.status_id == 1 &&  @task.author == current_user)
+    unless (@task.status_id > 1 && @task.users.include?(current_user)) or (@task.status_id == 1 &&  @task.author == current_user) or current_user.admin?
       flash[:error] = "Insufficient privileges! This Action is not available to you!"
       return redirect_to "/forbidden"
     end
