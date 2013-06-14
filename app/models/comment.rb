@@ -16,9 +16,10 @@ class Comment < ActiveRecord::Base
 
   def email_assignees
     recipients = self.task.users
-    recipients.delete(self.user) if recipients.include?(self.user)
+    # recipients.delete(self.user) if recipients.include?(self.user)
     emails = []
     recipients.each {|u| emails << u.email}    
+    emails.delete(self.user.email) if recipients.include?(self.user)
     UserMailer.comment_assignees_email(self, emails).deliver if emails.count > 0
   end
 

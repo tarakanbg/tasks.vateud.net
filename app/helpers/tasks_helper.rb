@@ -1,7 +1,7 @@
 module TasksHelper
   
   def edit_button(size, task)    
-    if (task.status_id > 1 && task.users.include?(current_user)) or (task.status_id == 1 && task.author == current_user)
+    if (task.status_id > 1 && task.users.include?(current_user)) or (task.status_id == 1 && task.author == current_user) or current_user.admin?
       if size == "big"
         link_to raw('<i class="icon-edit icon-white"></i> Edit'), edit_task_path(task), :title => "Edit task", :class => "btn btn-primary"
       elsif size == "mini"
