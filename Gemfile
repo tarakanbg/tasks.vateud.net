@@ -70,3 +70,4 @@ gem "paperclip", "~> 3.4.2"
 gem 'bootstrap-datepicker-rails'
 
 gem 'newrelic_rpm'
+gem "ransack", "~> 0.7.2"

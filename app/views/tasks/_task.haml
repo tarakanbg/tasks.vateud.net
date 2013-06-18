@@ -22,7 +22,7 @@
     %ul.nested_tasks
       - task.children.each do |child|
         - unless child.private? && current_user.staff == false
-          - if params[:archived] == "true" or @archived == true
+          - if @archived == true
             = render :partial => 'tasks/task', :locals => { :task => child }
           - else 
             - if child.active?

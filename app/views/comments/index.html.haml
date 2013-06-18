@@ -16,7 +16,7 @@
         - if current_user.staff?
           %td.comment_private= private_icon(comment) 
         %td.comment_task= link_to (trim_string(comment.task.name, 35)), task_path(comment.task)
-        %td.comment_comment= raw(trim_string(comment.text, 50))
+        %td.comment_comment= raw(trim_string(strip_tags(comment.text), 50))
         %td.comment_controls
           = link_to raw('<i class="icon-tasks"></i>'), task_path(comment.task), :title => "Show comment"
           = edit_button_comment("mini", comment)          

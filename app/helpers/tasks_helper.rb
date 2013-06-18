@@ -125,4 +125,8 @@ module TasksHelper
     result   
   end
 
+  def filter_button
+    raw('<a href="#task-filter" role="button" class="btn btn-primary" data-toggle="modal"><i class="icon-search icon-white"></i> Filter tasks</a>')
+  end
+
 end

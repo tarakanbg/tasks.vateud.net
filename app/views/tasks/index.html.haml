@@ -1,19 +1,22 @@
-- if params[:my] && params[:my] == "true"
-  .active_switch
+.active_switch
+  - if @my == true
     = active_inactive_switch_my
+  - if @filter == true
+    = filter_button
+
 
 .tasks_legend
-  .name Name
-  .status Status
+  .name= sort_link @search, :name, "Name"
+  .status= sort_link @search, :status_id, "Status"
   - if current_user.staff?
-    .private Private
-  .due_date Due date
+    .private= sort_link @search, :private, "Priv"
+  .due_date= sort_link @search, :due_date, "Due date"
   .assignees Assignees
   .controls Actions
 #tasks
   %ul.tasks
     - @tasks.each do |task|
-      - if params[:archived] == "true"
+      - if @archived == true
         = render :partial => 'tasks/task', :locals => { :task => task }
       - else 
         - if task.active?
@@ -21,4 +24,4 @@
 
 = will_paginate @collection
 
-/ = render :partial => "search_form"
+= render :partial => "search_form"

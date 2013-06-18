@@ -2,50 +2,47 @@ class TasksController < ApplicationController
 
   before_filter :confirm_enabled, :except => [:forbidden, :rss, :rss_completed, :rss_comments]
   before_filter :confirm_admin, :only => [:destroy]
-  # GET /tasks
-  # GET /tasks.json
+  
   def index
     @user = current_user
-    ord = get_order(params[:sort])
-    if params[:my] && params[:my] == "true"
-      if @user.staff == false
-        @search = Task.where(:author_id => @user.id).roots.order('created_at DESC')
-        @pagetitle = "Tasks created by user #{@user.name}"
-      else
-        @search = @user.tasks.roots.order('created_at DESC')
-        @pagetitle = "Tasks for user #{@user.name}"
-      end
-    else
-      if @user.staff == false
-        @search = Task.roots.public.order('created_at DESC')
-        @pagetitle = "VATEUD Active Tasks"
-      else
-        @search = Task.roots.order('created_at DESC')
-        @pagetitle = "VATEUD Active Tasks"
-      end
-    end
-    if params[:archived] && params[:archived] == "true"
-      if @user.staff == false
-        @search = Task.inactive.public.order('updated_at DESC')
-        @pagetitle = "VATEUD Archived Tasks"
-      else
-        @search = Task.inactive.order('updated_at DESC')
-        @pagetitle = "VATEUD Archived Tasks"
-      end
-    else
-      @search = @search.active
-    end
-    @search = Task.search(params[:search]) if params[:search]
-    @tasks = @search.paginate(:page => params[:page], :per_page => 25).order(ord)
+    @filter = true
+    @pagetitle = "VATEUD Active Tasks"
+    @search = Task.search(params[:q])
+    @search.sorts = 'updated_at desc' if @search.sorts.empty?
+    @user.staff? ? @tasks = @search.result : @tasks = @search.result.public
+    params[:commit] == "Search" ? @tasks = @tasks : @tasks = @tasks.roots
+    @tasks = @tasks.paginate(:page => params[:page], :per_page => 25)
 
     respond_to do |format|
-      format.html # index.html.haml
+      format.html 
       format.json { render json: @tasks }
     end
   end
 
-  # GET /tasks/1
-  # GET /tasks/1.json
+  def my
+    @user = current_user
+    @filter = true
+    @my = true
+    @user.staff? ? @pagetitle = "Tasks for user #{@user.name}" : @pagetitle = "Tasks created by user #{@user.name}"
+    @user.staff? ? @search = @user.tasks.search(params[:q]) : @search = Task.where(:author_id => @user.id).search(params[:q])
+    @search.sorts = 'updated_at desc' if @search.sorts.empty?
+    params[:commit] == "Search" ? @tasks = @search.result : @tasks = @search.result.roots
+    @tasks = @tasks.paginate(:page => params[:page], :per_page => 25)
+    render "index"
+  end
+
+  def archived
+    @user = current_user
+    # @filter = true
+    @archived = true
+    @pagetitle = "VATEUD Archived Tasks"
+    @search = Task.inactive.search(params[:q])
+    @search.sorts = 'updated_at desc' if @search.sorts.empty?
+    @user.staff? ? @tasks = @search.result : @tasks = @search.result.public
+    @tasks = @tasks.paginate(:page => params[:page], :per_page => 25)
+    render "index"
+  end
+
   def show    
     @task = Task.find(params[:id])
     if @task.private? && @task.author != current_user && current_user.staff == false
@@ -68,8 +65,6 @@ class TasksController < ApplicationController
     end
   end
 
-  # GET /tasks/new
-  # GET /tasks/new.json
   def new
     @pagetitle = "New Task"
     @task = Task.new
@@ -84,7 +79,6 @@ class TasksController < ApplicationController
     end
   end
 
-  # GET /tasks/1/edit
   def edit    
     @task = Task.find(params[:id])
     @pagetitle = "Edit Task: #{@task.name}"
@@ -94,8 +88,6 @@ class TasksController < ApplicationController
     end
   end
 
-  # POST /tasks
-  # POST /tasks.json
   def create
     @task = Task.new(params[:task])
 
@@ -117,8 +109,6 @@ class TasksController < ApplicationController
     end
   end
 
-  # PUT /tasks/1
-  # PUT /tasks/1.json
   def update
     @task = Task.find(params[:id])
 
@@ -155,8 +145,6 @@ class TasksController < ApplicationController
     end
   end
 
-  # DELETE /tasks/1
-  # DELETE /tasks/1.json
   def destroy
     @task = Task.find(params[:id])
     @task.destroy
@@ -291,16 +279,7 @@ class TasksController < ApplicationController
   end
   
 private  
-
-  def get_order(param)
-    case param
-      when "id" then "id DESC"
-      when "name" then "name ASC"
-      else
-       "id DESC"
-    end
-  end
-
+ 
   def email_author(task)
     unless task.users.include?(task.author)
       UserMailer.author_status_email(task).deliver

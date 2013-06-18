@@ -1,0 +1,31 @@
+#task-filter.modal.hide
+  = search_form_for @search do |f|
+    .modal-header
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      %h3 Filter tasks
+    
+    .modal-body
+      = f.label "Name contains:"
+      = f.text_field :name_cont
+
+      = f.label "Status is:"
+      = f.select :status_id_eq, options_from_collection_for_select(Status.all, "id", "name", @search.status_id_eq), :include_blank => true
+
+      = f.label "Description contains:"
+      = f.text_field :description_cont
+
+      = f.label "Assignee name(s) contain:"
+      = f.text_field :users_name_cont
+
+      = f.label "Comments contain:"
+      = f.text_field :comments_text_cont
+
+  
+
+      
+    .modal-footer
+      <a href="#" class="btn" data-dismiss="modal">Close</a>
+      = f.submit "Search", :class => "btn btn-primary"
+    
+
+  
