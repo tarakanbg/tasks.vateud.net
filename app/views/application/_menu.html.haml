@@ -10,23 +10,24 @@
       / <a class="brand" href="/">
       / <strong>VATEUD PTD</strong>
       / </a>
-      .nav-collapse.collapse
-        %ul.nav.pull-right
-          %li= link_to raw('<i class="icon-plus icon-white"></i> NEW TASK'), new_task_path
-          %li= link_to raw('<i class="icon-tasks icon-white"></i> MY TASKS'), :controller => :tasks, :action => :my
-          %li= link_to raw('<i class="icon-folder-open icon-white"></i> ALL TASKS'), tasks_path
-          %li= link_to raw('<i class="icon-lock icon-white"></i> ARCHIVE'), :controller => :tasks, :action => :archived
-          %li= link_to raw('<i class="icon-text-width icon-white"></i> COMMENTS'), comments_path
+      -if current_user
+        .nav-collapse.collapse
+          %ul.nav.pull-right
+            %li= link_to raw('<i class="icon-plus icon-white"></i> NEW TASK'), new_task_path
+            %li= link_to raw('<i class="icon-tasks icon-white"></i> MY TASKS'), :controller => :tasks, :action => :my
+            %li= link_to raw('<i class="icon-folder-open icon-white"></i> ALL TASKS'), tasks_path
+            %li= link_to raw('<i class="icon-lock icon-white"></i> ARCHIVE'), :controller => :tasks, :action => :archived
+            %li= link_to raw('<i class="icon-text-width icon-white"></i> COMMENTS'), comments_path
 
-          %li.dropdown
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <i class="icon-user icon-white"></i>
-            USERS
-            <b class="caret"></b>
-            </a>
-            %ul.dropdown-menu
-              %li= link_to "Staff List", users_path(:staff => "true")
-              %li= link_to "Public Users List", users_path
-              %li= link_to "Logout", destroy_user_session_path, :method => :delete
+            %li.dropdown
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <i class="icon-user icon-white"></i>
+              USERS
+              <b class="caret"></b>
+              </a>
+              %ul.dropdown-menu
+                %li= link_to "Staff List", users_path(:staff => "true")
+                %li= link_to "Public Users List", users_path
+                %li= link_to "Logout", destroy_user_session_path, :method => :delete
 
             

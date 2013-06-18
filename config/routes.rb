@@ -1,10 +1,10 @@
 TasksVateudNet::Application.routes.draw do
 
   devise_for :users
+  resources :users, :except => [:destroy, :new, :create]
   get 'tasks/my' => 'tasks#my'
   get 'tasks/archived' => 'tasks#archived'
   resources :tasks
-  resources :users, :except => [:destroy, :new, :create]
   resources :attachments, :except => [:index, :show]
   resources :comments, :except => [:show]
 
