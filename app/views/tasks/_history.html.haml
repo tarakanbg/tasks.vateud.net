@@ -8,7 +8,9 @@
         %li
           %span.bold= version.event.titlecase + "d "
           by
-          %span.bold= link_to User.find(version.whodunnit).name, user_path(version.whodunnit)
+          %span.bold
+            - unless version.whodunnit == nil
+              = link_to User.find(version.whodunnit).name, user_path(version.whodunnit)
           on
           %span.muted= version.created_at
           ="=>"
