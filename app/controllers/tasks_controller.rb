@@ -9,7 +9,7 @@ class TasksController < ApplicationController
     @pagetitle = "VATEUD Active Tasks"
     @search = Task.search(params[:q])
     @search.sorts = 'updated_at desc' if @search.sorts.empty?
-    @user.staff? ? @tasks = @search.result : @tasks = @search.result.public
+    @user.staff? ? @tasks = @search.result(:distinct => true) : @tasks = @search.result(:distinct => true).public
     params[:commit] == "Search" ? @tasks = @tasks : @tasks = @tasks.roots
     @tasks = @tasks.paginate(:page => params[:page], :per_page => 25)
 
@@ -26,7 +26,7 @@ class TasksController < ApplicationController
     @user.staff? ? @pagetitle = "Tasks for user #{@user.name}" : @pagetitle = "Tasks created by user #{@user.name}"
     @user.staff? ? @search = @user.tasks.search(params[:q]) : @search = Task.where(:author_id => @user.id).search(params[:q])
     @search.sorts = 'updated_at desc' if @search.sorts.empty?
-    params[:commit] == "Search" ? @tasks = @search.result : @tasks = @search.result.roots
+    params[:commit] == "Search" ? @tasks = @search.result(:distinct => true) : @tasks = @search.result(:distinct => true).roots
     @tasks = @tasks.paginate(:page => params[:page], :per_page => 25)
     render "index"
   end
