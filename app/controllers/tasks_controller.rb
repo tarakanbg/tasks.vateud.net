@@ -51,7 +51,7 @@ class TasksController < ApplicationController
     end
     @pagetitle = "Task details: #{@task.name}"
     @archived = true
-    @comments = @task.comments
+    @comments = @task.comments.order('created_at ASC')
     @comment = Comment.new
     @comment.task_id = @task.id
     @comment.user_id = current_user.id
