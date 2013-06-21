@@ -1,5 +1,12 @@
 = simple_form_for(@task) do |f|
   = f.error_notification
+  .alert.new-task-alert
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    <strong>Note:</strong> All tasks should be 
+    = link_to "SMART", "http://topachievement.com/smart.html", target: "_blank"
+    (Specific, Measurable, Attainable, Realistic, Timely).
+    For discussions and general ideas, consider using the
+    = link_to "forums", "http://forum.vateud.net/", target: "_blank"
   .form-inputs.task-form
     .row
       .span8
