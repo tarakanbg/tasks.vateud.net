@@ -1,5 +1,7 @@
 TasksVateudNet::Application.routes.draw do
 
+  get "help" => 'users#help'
+
   devise_for :users
   resources :users, :except => [:destroy, :new, :create]
   get 'tasks/my' => 'tasks#my'

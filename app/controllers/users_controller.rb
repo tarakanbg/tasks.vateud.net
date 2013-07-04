@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :confirm_enabled
+  before_filter :confirm_enabled, :except => [:help]
   before_filter :confirm_admin, :only => [:enable, :disable, :staff, :destaff, :destroy]
 
   # GET /users
@@ -163,5 +163,11 @@ class UsersController < ApplicationController
     redirect_to :back
   rescue ActionController::RedirectBackError
     redirect_to root_path
+  end
+
+  def help
+    m = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
+    @content = m.render(File.open(Rails.root + "README.md", 'r').read)
+    # render :text => content
   end
 end

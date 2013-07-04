@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  before_filter :authenticate_user!, :except => [:rss, :rss_completed, :rss_comments]
+  before_filter :authenticate_user!, :except => [:rss, :rss_completed, :rss_comments, :help]
 
   def confirm_enabled
     unless current_user.enabled?

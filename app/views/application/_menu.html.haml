@@ -11,9 +11,9 @@
       / <a class="brand" href="/">
       / <strong>VATEUD PTD</strong>
       / </a>
-      -if current_user
-        .nav-collapse.collapse
-          %ul.nav.pull-right
+      .nav-collapse.collapse
+        %ul.nav.pull-right
+          -if current_user
             %li= link_to raw('<i class="icon-plus icon-white"></i> NEW TASK'), new_task_path
             %li= link_to raw('<i class="icon-tasks icon-white"></i> MY TASKS'), :controller => :tasks, :action => :my
             %li= link_to raw('<i class="icon-folder-open icon-white"></i> ALL TASKS'), tasks_path
@@ -30,5 +30,7 @@
                 %li= link_to "Staff List", users_path(:staff => "true")
                 %li= link_to "Public Users List", users_path
                 %li= link_to "Logout", destroy_user_session_path, :method => :delete
-
-            
+          - unless current_user
+            %li= link_to raw('<i class="icon-user icon-white"></i> LOGIN'), "/"
+          %li= link_to raw('<i class="icon-question-sign icon-white"></i> HELP'), "/help"
+          
