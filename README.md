@@ -30,7 +30,7 @@ The VATEUD tasks application is designed to achieve the following goals:
 
 The day-to-day use of the tasks application will result in an environment where:
 
-* each VATEUD staff members is fully aware of all the other staff member activities, their progress
+* each VATEUD staff member is fully aware of all the other staff member activities, their progress
   and status, their estimated completion dates
 * each VATEUD staff member can contribute and get involved on tasks that are not directly assigned to
   them, provided their input and cooperation is necessary
