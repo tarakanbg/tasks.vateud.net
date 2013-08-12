@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <p><em>This is an automated email message, please do not reply!</em></p>
+    
+    <h1>Dear VATEUD Tasks admin,</h1>
+    <p>
+      A new user just registered in the tasks and workflow application.<br/><br/>
+      
+      User details:<br/><br/>
+
+      Name: <%= @user.name %><br/>
+      VATSIM ID: <%= @user.vatsimid %><br/>
+      Email: <%= @user.email %><br/>
+      vACC: <%= @user.vacc %><br/>
+      Position: <%= @user.position %><br/>
+      
+      
+    </p>
+    <p>
+      You can enable this user account by visiting <a href="http://tasks.vateud.net/users">tasks.vateud.net/users</a>
+    </p>
+    <p>Good luck and have a great day!</p>
+    <p><em><strong>The VATEUD Web Services Team</strong></em></p>
+  </body>
+</html>

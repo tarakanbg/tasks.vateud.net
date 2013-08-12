@@ -23,5 +23,11 @@ class UserMailer < ActionMailer::Base
     mail(:to => emails, :subject => "VATEUD Tasks: new comment posted on your task")
   end
 
+  def new_user_admins_email(user, emails)
+    @user = user
+    mail(:to => emails, :subject => "VATEUD Tasks: new user registration")
+  end
+
+  
 end
 

@@ -24,9 +24,19 @@ class User < ActiveRecord::Base
 
   scope :staff, where(:staff => true)
   scope :nonstaff, where(:staff => false)
+  scope :admins, where(:admin => true)
 
   attr_reader :name_position
   attr_reader :authored_tasks
+
+  after_create :email_admins
+
+  def email_admins
+    admins = User.admins    
+    emails = []
+    admins.each {|u| emails << u.email}    
+    UserMailer.new_user_admins_email(self, emails).deliver if emails.count > 0
+  end
 
   def name_position
     "#{self.name} (#{self.position})"
