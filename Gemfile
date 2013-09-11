@@ -43,7 +43,8 @@ gem 'jquery-rails'
 
 gem 'quiet_assets', :group => :development
 gem "thin", "~> 1.5.1", :group => :development
-gem "yaml_db", "~> 0.2.3", :group => :development
+
+gem "yaml_db", "~> 0.2.3"
 
 gem "pg", "~> 0.15.0"
 
