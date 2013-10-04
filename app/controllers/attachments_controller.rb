@@ -3,8 +3,7 @@ class AttachmentsController < ApplicationController
   before_filter :confirm_enabled
   # before_filter :confirm_admin, :only => [:destroy]
   
-  # GET /attachments
-  # GET /attachments.json
+
   def index
     @attachments = Attachment.all
 
@@ -14,8 +13,6 @@ class AttachmentsController < ApplicationController
     end
   end
 
-  # GET /attachments/1
-  # GET /attachments/1.json
   def show
     @attachment = Attachment.find(params[:id])
 
@@ -25,8 +22,6 @@ class AttachmentsController < ApplicationController
     end
   end
 
-  # GET /attachments/new
-  # GET /attachments/new.json
   def new
     @attachment = Attachment.new
     @task = Task.find(params[:task])
@@ -43,7 +38,6 @@ class AttachmentsController < ApplicationController
     end
   end
 
-  # GET /attachments/1/edit
   def edit
     @attachment = Attachment.find(params[:id])
     @task = @attachment.task
@@ -55,8 +49,6 @@ class AttachmentsController < ApplicationController
     @edit = true
   end
 
-  # POST /attachments
-  # POST /attachments.json
   def create
     @attachment = Attachment.new(params[:attachment])
 
@@ -71,8 +63,6 @@ class AttachmentsController < ApplicationController
     end
   end
 
-  # PUT /attachments/1
-  # PUT /attachments/1.json
   def update
     @attachment = Attachment.find(params[:id])
 
@@ -87,8 +77,6 @@ class AttachmentsController < ApplicationController
     end
   end
 
-  # DELETE /attachments/1
-  # DELETE /attachments/1.json
   def destroy
     @attachment = Attachment.find(params[:id])
     @task = @attachment.task

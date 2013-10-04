@@ -132,7 +132,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @user.enabled = true
     @user.save
-    UserMailer.enabled_email(@user).deliver
+    UserMailer.delay.enabled_email(@user)
     redirect_to :back
   rescue ActionController::RedirectBackError
     redirect_to root_path

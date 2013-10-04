@@ -282,7 +282,7 @@ private
  
   def email_author(task)
     unless task.users.include?(task.author)
-      UserMailer.author_status_email(task).deliver
+      UserMailer.delay.author_status_email(task)
     end 
   end
 end

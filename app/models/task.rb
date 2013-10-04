@@ -47,7 +47,7 @@ class Task < ActiveRecord::Base
     task = Task.find(task.id)
     emails = []
     users.each {|u| emails << User.find(u).email}
-    UserMailer.task_email(task, emails).deliver
+    UserMailer.delay.task_email(task, emails)
   end
 
   def assignees

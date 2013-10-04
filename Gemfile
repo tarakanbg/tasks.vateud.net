@@ -73,3 +73,5 @@ gem 'bootstrap-datepicker-rails'
 gem 'newrelic_rpm'
 gem "ransack", "~> 0.7.2"
 gem "redcarpet", "~> 2.3.0"
+
+gem "sidekiq", "~> 2.15.1"

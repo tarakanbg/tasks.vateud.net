@@ -35,7 +35,7 @@ class User < ActiveRecord::Base
     admins = User.admins    
     emails = []
     admins.each {|u| emails << u.email}    
-    UserMailer.new_user_admins_email(self, emails).deliver if emails.count > 0
+    UserMailer.delay.new_user_admins_email(self, emails) if emails.count > 0
   end
 
   def name_position
