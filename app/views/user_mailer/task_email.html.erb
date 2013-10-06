@@ -6,9 +6,9 @@
   <body>
     <p><em>This is an automated email message, please do not reply!</em></p>
     
-    <h1>Dear VATEUD Staff member,</h1>
+    <h1>Dear <%= ORG %> Staff member,</h1>
     <p>
-      A new task has been assigned to you by VATEUD.<br/><br/>
+      A new task has been assigned to you by <%= ORG %>.<br/><br/>
       
       Task details:<br/><br/>
 
@@ -24,6 +24,6 @@
       You can check and manage this task at <a href="<%= URI.join(root_url, task_path(@task)) %>"><%= URI.join(root_url, task_path(@task)) %></a>
     </p>
     <p>Good luck and have a great day!</p>
-    <p><em><strong>The VATEUD Web Services Team</strong></em></p>
+    <p><em><strong>The <%= ORG %> Web Services Team</strong></em></p>
   </body>
 </html>

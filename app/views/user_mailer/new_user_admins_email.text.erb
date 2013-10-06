@@ -1,6 +1,6 @@
 *This is an automated email message, please do not reply!*
     
-Dear VATEUD Tasks admin,
+Dear <%= ORG %> Tasks admin,
 
 A new user just registered in the tasks and workflow application.
   
@@ -13,8 +13,8 @@ A new user just registered in the tasks and workflow application.
   Position: <%= @user.position %>
   
 
-You can enable this user account by visiting http://tasks.vateud.net/users
+You can enable this user account by visiting <%= URI.join(root_url, "users") %>
 
 Good luck and have a great day!
 
-*The VATEUD Web Services Team*
+*The <%= ORG %> Web Services Team*

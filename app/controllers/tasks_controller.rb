@@ -6,7 +6,7 @@ class TasksController < ApplicationController
   def index
     @user = current_user
     @filter = true
-    @pagetitle = "VATEUD Active Tasks"
+    @pagetitle = "#{ORG} Active Tasks"
     @search = Task.search(params[:q])
     @search.sorts = 'updated_at desc' if @search.sorts.empty?
     @user.staff? ? @tasks = @search.result(:distinct => true) : @tasks = @search.result(:distinct => true).public
@@ -35,7 +35,7 @@ class TasksController < ApplicationController
     @user = current_user
     # @filter = true
     @archived = true
-    @pagetitle = "VATEUD Archived Tasks"
+    @pagetitle = "#{ORG} Archived Tasks"
     @search = Task.inactive.search(params[:q])
     @search.sorts = 'updated_at desc' if @search.sorts.empty?
     @user.staff? ? @tasks = @search.result : @tasks = @search.result.public

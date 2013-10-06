@@ -2,7 +2,7 @@
     
 Dear <%= @task.author.name %>,
 
-A task you delegated within the VATEUD task system has changed its status.
+A task you delegated within the <%= ORG %> task system has changed its status.
 
 Task details:
 
@@ -19,4 +19,4 @@ You can check and comment on this task at <%= URI.join(root_url, task_path(@task
 
 Good luck and have a great day!
 
-*The VATEUD Web Services Team*
+*The <%= ORG %> Web Services Team*

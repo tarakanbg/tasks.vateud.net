@@ -8,13 +8,13 @@
     
     <h1>Dear <%= @user.name %>,</h1>
     <p>
-      Your VATEUD Task tracker account has been now enabled by an administrator.      
+      Your <%= ORG %> Task tracker account has been now enabled by an administrator.      
       
     </p>
     <p>
-      You can login and access the application at <a href="http://tasks.vateud.net">http://tasks.vateud.net</a>
+      You can login and access the application at <a href="<%= URI.join(root_url, " ") %>"><%= URI.join(root_url, " ") %></a>
     </p>
     <p>Good luck and have a great day!</p>
-    <p><em><strong>The VATEUD Web Services Team</strong></em></p>
+    <p><em><strong>The <%= ORG %> Web Services Team</strong></em></p>
   </body>
 </html>
