@@ -1,8 +1,8 @@
 *This is an automated email message, please do not reply!
     
-Dear <%= ORG %> Staff member,
+Dear <%= @org %> Staff member,
 
-A new task has been assigned to you by <%= ORG %>.
+A new task has been assigned to you by <%= @org %>.
       
   Task details:
 
@@ -17,4 +17,4 @@ You can check and manage this task at <%= URI.join(root_url, task_path(@task)) %
 
 Good luck and have a great day!
 
-*The <%= ORG %> Web Services Team*
+*The <%= @org %> Web Services Team*
