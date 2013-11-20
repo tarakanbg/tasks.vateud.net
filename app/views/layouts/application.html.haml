@@ -1,7 +1,7 @@
 !!! 5
 %html
   %head
-    %title= "#{@org} Tasks"
+    %title= "#{Settings.org} Tasks"
     <meta name="description" content="VATEUD Tasks Tracker" />
     <meta name="keywords" content="VATSIM, VATEUD, flight, simulation, atc, PTD, ATO, pilot training" /> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,9 +10,9 @@
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    = auto_discovery_link_tag(:rss, @rss_new, {:title => "#{@org} New Tasks"})
-    = auto_discovery_link_tag(:rss, @rss_completed, {:title => "#{@org} Completed Tasks"})
-    = auto_discovery_link_tag(:rss, @rss_comments, {:title => "#{@org} Latest Task Comments"})
+    = auto_discovery_link_tag(:rss, Settings.rss_new, {:title => "#{Settings.org} New Tasks"})
+    = auto_discovery_link_tag(:rss, Settings.rss_completed, {:title => "#{Settings.org} Completed Tasks"})
+    = auto_discovery_link_tag(:rss, Settings.rss_comments, {:title => "#{Settings.org} Latest Task Comments"})
     = csrf_meta_tags
 
   %body.pull_top

@@ -2,30 +2,30 @@ class UserMailer < ActionMailer::Base
   default from: "no-reply@vateud.net"
 
 
-  def task_email(task, emails)
-    @task = task
-    mail(:to => emails, :subject => "New tasked assigned to you by #{@org}")
+  def task_email(task_id, emails)
+    @task = Task.find(task_id)
+    mail(:to => emails, :subject => "New tasked assigned to you by #{Settings.org}")
   end
 
-  def enabled_email(user)
-    @user = user
-    mail(:to => user.email, :subject => "#{@org} Tasks tracker account enabled")
+  def enabled_email(user_id)
+    @user = User.find(user_id)
+    mail(:to => @user.email, :subject => "#{Settings.org} Tasks tracker account enabled")
   end
 
-  def author_status_email(task)
-    @task = task
-    mail(:to => task.author.email, :subject => "#{@org} Tasks: task status changed")
+  def author_status_email(task_id)
+    @task = Task.find(task_id)
+    mail(:to => @task.author.email, :subject => "#{Settings.org} Tasks: task status changed")
   end
 
-  def comment_assignees_email(comment, emails)
-    @comment = comment
+  def comment_assignees_email(comment_id, emails)
+    @comment = Comment.find(comment_id)
     @task = comment.task
-    mail(:to => emails, :subject => "#{@org} Tasks: new comment posted on your task")
+    mail(:to => emails, :subject => "#{Settings.org} Tasks: new comment posted on your task")
   end
 
-  def new_user_admins_email(user, emails)
-    @user = user
-    mail(:to => emails, :subject => "#{@org} Tasks: new user registration")
+  def new_user_admins_email(user_id, emails)
+    @user = User.find(user_id)
+    mail(:to => emails, :subject => "#{Settings.org} Tasks: new user registration")
   end
 
   

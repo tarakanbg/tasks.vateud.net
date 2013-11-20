@@ -1,7 +1,7 @@
 xml.instruct! :xml, :version => "1.0" 
 xml.rss :version => "2.0" do
   xml.channel do
-    xml.title "#{@org} Latest Comments"
+    xml.title "#{Settings.org} Latest Comments"
     xml.description "Vatsim European Division latest task comments feed"
     xml.link tasks_url
 

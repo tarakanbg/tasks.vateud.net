@@ -20,7 +20,7 @@ class Comment < ActiveRecord::Base
     emails = []
     recipients.each {|u| emails << u.email}    
     emails.delete(self.user.email) if recipients.include?(self.user)
-    UserMailer.delay.comment_assignees_email(self, emails) if emails.count > 0
+    UserMailer.delay.comment_assignees_email(self.id, emails) if emails.count > 0
   end
 
   def self.rss

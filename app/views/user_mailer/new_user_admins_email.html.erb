@@ -6,7 +6,7 @@
   <body>
     <p><em>This is an automated email message, please do not reply!</em></p>
     
-    <h1>Dear <%= @org %> Tasks admin,</h1>
+    <h1>Dear <%= Settings.org %> Tasks admin,</h1>
     <p>
       A new user just registered in the tasks and workflow application.<br/><br/>
       
@@ -24,6 +24,6 @@
       You can enable this user account by visiting <%= URI.join(root_url, "users") %>
     </p>
     <p>Good luck and have a great day!</p>
-    <p><em><strong>The <%= @org %> Web Services Team</strong></em></p>
+    <p><em><strong>The <%= Settings.org %> Web Services Team</strong></em></p>
   </body>
 </html>

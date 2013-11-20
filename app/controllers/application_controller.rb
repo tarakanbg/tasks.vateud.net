@@ -1,7 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  before_filter :authenticate_user!, :except => [:rss, :@rss_completed, :rss_comments, :help]
-  before_filter :app_options
+  before_filter :authenticate_user!, :except => [:rss, :rss_completed, :rss_comments, :help]
 
   def confirm_enabled
     unless current_user.enabled?
@@ -24,11 +23,4 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def app_options
-    @org = "VATEUD"
-    @rss_new = "http://feeds.feedburner.com/VateudNewTasks"
-    @rss_completed = "http://feeds.feedburner.com/VateudCompletedTasks"
-    @rss_comments = "http://feeds.feedburner.com/VateudLatestComments"
-    @logo_image = "vateud_png.png"
-  end
 end

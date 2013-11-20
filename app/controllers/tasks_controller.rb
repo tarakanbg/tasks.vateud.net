@@ -1,12 +1,12 @@
 class TasksController < ApplicationController
 
-  before_filter :confirm_enabled, :except => [:forbidden, :rss, :@rss_completed, :rss_comments]
+  before_filter :confirm_enabled, :except => [:forbidden, :rss, :Settings.rss_completed, :rss_comments]
   before_filter :confirm_admin, :only => [:destroy]
   
   def index
     @user = current_user
     @filter = true
-    @pagetitle = "#{@org} Active Tasks"
+    @pagetitle = "#{Settings.org} Active Tasks"
     @search = Task.search(params[:q])
     @search.sorts = 'updated_at desc' if @search.sorts.empty?
     @user.staff? ? @tasks = @search.result(:distinct => true) : @tasks = @search.result(:distinct => true).public
@@ -35,7 +35,7 @@ class TasksController < ApplicationController
     @user = current_user
     # @filter = true
     @archived = true
-    @pagetitle = "#{@org} Archived Tasks"
+    @pagetitle = "#{Settings.org} Archived Tasks"
     @search = Task.inactive.search(params[:q])
     @search.sorts = 'updated_at desc' if @search.sorts.empty?
     @user.staff? ? @tasks = @search.result : @tasks = @search.result.public
@@ -282,7 +282,7 @@ private
  
   def email_author(task)
     unless task.users.include?(task.author)
-      UserMailer.delay.author_status_email(task)
+      UserMailer.delay.author_status_email(task.id)
     end 
   end
 end

@@ -1,0 +1,20 @@
+# config/application.yml
+defaults: &defaults
+  cool:
+    sweet: nested settings
+  # neat_setting: 24
+  # awesome_setting: 
+  org: VATEUD
+  rss_new: http://feeds.feedburner.com/VateudNewTasks
+  rss_completed: http://feeds.feedburner.com/VateudCompletedTasks
+  rss_comments: http://feeds.feedburner.com/VateudLatestComments
+  logo_image: vateud_png.png
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
