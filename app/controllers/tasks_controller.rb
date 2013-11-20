@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
 
-  before_filter :confirm_enabled, :except => [:forbidden, :rss, :Settings.rss_completed, :rss_comments]
+  before_filter :confirm_enabled, :except => [:forbidden, :rss, :rss_completed, :rss_comments]
   before_filter :confirm_admin, :only => [:destroy]
   
   def index
