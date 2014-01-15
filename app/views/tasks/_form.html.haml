@@ -10,7 +10,7 @@
     .row
       .span8        
         = f.label "Parent task"
-        = f.select :parent_id, nested_set_options(Task.active, @task) {|i| "#{'-' * i.level} #{i.name}" }, include_blank: true
+        = f.select :parent_id, nested_set_options(Task.active, @task) {|i| "#{'-' * i.level} #{i.name}"}, include_blank: true
       .span4
         = f.association :status, include_blank: false
     .row

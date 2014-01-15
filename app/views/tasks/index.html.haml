@@ -22,6 +22,6 @@
         - if task.active?
           = render :partial => 'tasks/task', :locals => { :task => task }
 
-= will_paginate @collection
+/ = will_paginate @collection
 
 = render :partial => "search_form"

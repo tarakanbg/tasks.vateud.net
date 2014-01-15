@@ -11,7 +11,7 @@ class TasksController < ApplicationController
     @search.sorts = 'updated_at desc' if @search.sorts.empty?
     @user.staff? ? @tasks = @search.result(:distinct => true) : @tasks = @search.result(:distinct => true).public
     params[:commit] == "Search" ? @tasks = @tasks : @tasks = @tasks.roots
-    @tasks = @tasks.paginate(:page => params[:page], :per_page => 25)
+    # @tasks = @tasks.paginate(:page => params[:page], :per_page => 25)
 
     respond_to do |format|
       format.html 
@@ -27,7 +27,7 @@ class TasksController < ApplicationController
     @user.staff? ? @search = @user.tasks.search(params[:q]) : @search = Task.where(:author_id => @user.id).search(params[:q])
     @search.sorts = 'updated_at desc' if @search.sorts.empty?
     params[:commit] == "Search" ? @tasks = @search.result(:distinct => true) : @tasks = @search.result(:distinct => true).roots
-    @tasks = @tasks.paginate(:page => params[:page], :per_page => 25)
+    # @tasks = @tasks.paginate(:page => params[:page], :per_page => 25)
     render "index"
   end
 
