@@ -39,7 +39,7 @@ class TasksController < ApplicationController
     @search = Task.inactive.search(params[:q])
     @search.sorts = 'updated_at desc' if @search.sorts.empty?
     @user.staff? ? @tasks = @search.result : @tasks = @search.result.public
-    @tasks = @tasks.paginate(:page => params[:page], :per_page => 25)
+    # @tasks = @tasks.paginate(:page => params[:page], :per_page => 25)
     render "index"
   end
 
