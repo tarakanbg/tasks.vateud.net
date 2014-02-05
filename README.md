@@ -1,6 +1,6 @@
 # VATEUD tasks and workflow application: user guide
 
-*by __Svilen Vassilev__, VATEUD7, Web Services Director*
+*by __Svilen Vassilev__*
 
 ___
 
@@ -57,11 +57,11 @@ The day-to-day use of the tasks application will result in an environment where:
 
 * The application resides at [tasks.vateud.net](http://tasks.vateud.net/)
 * __RSS feeds__ are available at [tasks.vateud.net](http://tasks.vateud.net/) and require no accounts or
-  authentication  
+  authentication
   ![RSS Feeds](http://i.imgur.com/FARLZs8.png)
 * For accessing the interface and for posting new tasks a __sign-up__ is required. The registration form
   is publicly open, however newly created accounts require manual review and __activation__ by an admin.
-  Email notification will be sent to the user when their account has been enabled.  
+  Email notification will be sent to the user when their account has been enabled.
   ![Registration form](http://i.imgur.com/505u1RO.png)
 
 ### User eligibility
@@ -91,7 +91,7 @@ In its current implementation the app has 4 levels of access with the following 
 
 ### Timestamps
 All times recorded and displayed by the application use the zero meridian (__zulu__) time!
- 
+
 ## Concepts
 As this application supersedes previous experiments and collaboration attempts based on other platforms
 and solutions, it has been intentionally designed with maximum simplicity and usability and minimum
@@ -103,7 +103,7 @@ concise and powerful in serving the objectives it was designed to handle.
 The entire application revolves and is centered around the concept of a task: each item created is a task
 and tasks can be assigned (delegated) to staff members, edited, managed and organized in a hierarchy. More
 complex concepts such as projects have been avoided in a favour of a flexible, tree-like structure of
-nested tasks. 
+nested tasks.
 
 ### The nested tree design
 If we think about what a project is: it's nothing but a task, composed of multiple subtasks, each of which
@@ -112,7 +112,7 @@ in a tree-like hierarchy: each task can have an arbitrary number of "children" t
 of them can in turn, have their own "children" or "branches" and this hierarchy can reach as deep as needed,
 there are no imposed limitations. Hence complex tasks can have a complex tree of descendants below them if
 necessary. The app interface for browsing those trees is very visual and intuitive, borrowing from the familiar
-old computer file browsers:  
+old computer file browsers:
 
 ![Task tree](http://i.imgur.com/byGYw0U.png)
 
@@ -154,11 +154,11 @@ assignees.
 ### Private tasks
 
 Upon creation or editing, a task can be flagged as __private__. This means it will only be visible to user with
-staff-level accounts (EUD/EUR) and __will not__ be available for public users:  
+staff-level accounts (EUD/EUR) and __will not__ be available for public users:
 
 ![Private tasks](http://i.imgur.com/oI632nU.png)
 
-Private tasks are marked with an "eye" symbol inside the tasks tree for easy identification:  
+Private tasks are marked with an "eye" symbol inside the tasks tree for easy identification:
 
 ![Private eye](http://i.imgur.com/mEUWy3o.png)
 
@@ -185,10 +185,10 @@ is still "new", or later on by the task assignee(s). Attachments can be edited o
 ### Comments
 
 Comments can be posted below each task as a way of communication between the task author and the assignee(s).
-The comments system can be used by the task authors as a means of following up with the task, providing 
-additional input, clarification, etc. Comments system is open to everybody, meaning that public-level accounts 
+The comments system can be used by the task authors as a means of following up with the task, providing
+additional input, clarification, etc. Comments system is open to everybody, meaning that public-level accounts
 and non-assignees can also comment on any task (as long as it's not private.) Just like the task descriptions,
-comments support rich text formatting and can be edited or deleted by their authors if needed. Mini buttons 
+comments support rich text formatting and can be edited or deleted by their authors if needed. Mini buttons
 positioned to the right of the comments details can be clicked to trigger the edit or delete actions:
 
 ![Comments mini buttons](http://i.imgur.com/8FpPIo3.png)
@@ -212,7 +212,7 @@ the histories are displayed in reverse chronological order:
 * on each individual user profile (scoped for the particular user)
 
 Currently the changesets are displayed in their raw (and probably somewhat cryptic) json format, but more advanced
-and user friendly parsing might be implemented later on if there's sufficient demand for it.  
+and user friendly parsing might be implemented later on if there's sufficient demand for it.
 
 ![Task history](http://i.imgur.com/oUS6ht0.png)
 
@@ -248,10 +248,10 @@ This list contains the following elements:
   in red
 * __assignees__: the names of the task's assignee(s), also trimmed to a certain length to avoid over-stretching
 * __actions mini-buttons__: shortcuts to the available actions for the particular task. The number and type of these
-  buttons depends on the affiliation of the user viewing the page to the task in question, and also to some extent - 
+  buttons depends on the affiliation of the user viewing the page to the task in question, and also to some extent -
   on the user's rank. For example the "show" action is available to all users and all tasks, however the "accept"
   action is only available to assignees of the task and only while the task status is "new". The types of actions
-  and their availability is described in detail in the "Task actions" section below. All the mini-buttons here 
+  and their availability is described in detail in the "Task actions" section below. All the mini-buttons here
   display an explanatory tooltip on hover.
 
 #### Sorting & Column headers
@@ -261,12 +261,12 @@ tasks being shown on top.
 
 The headers of most columns in the list are clickable to allow sorting of the entire list by the selected column.
 Thus for example clicking on the "Name" label will sort all tasks in ascending alphabetical order. A mini-arrow will
-appear next to the label to indicate the chosen sorting and its direction:  
+appear next to the label to indicate the chosen sorting and its direction:
 
 ![List alphabetical](http://i.imgur.com/u36iA3d.png)
 
 Clicking again on the sane label, in our example it's the "Name", will reverse the sorting order, so all tasks will
-be sorted in descending alphabetical order, also indicated by the reversed direction of the mini-arrow:  
+be sorted in descending alphabetical order, also indicated by the reversed direction of the mini-arrow:
 
 ![List reverse alphabetical](http://i.imgur.com/vZdWSgc.png)
 
@@ -301,12 +301,12 @@ This difference is consequential to the fact that public-level accounts can crea
 be assigned to tasks (can't be assignees). For public users this is also a convenient overview to keep track on the
 tasks they've created and assigned and of their progress.
 
-One more difference here is the ___"Switch to archived tasks"___  button:  
+One more difference here is the ___"Switch to archived tasks"___  button:
 
 ![Switch archived](http://i.imgur.com/Tl8e3sM.png)
 
 When pressed in displays a view of all the archived (completed & cancelled) tasks, once again scoped via the user
-as described above:  
+as described above:
 
 ![Archived user](http://i.imgur.com/UspQYSx.png)
 
@@ -349,7 +349,7 @@ Clicking the task name or the "Task Details" mini-button opens the task details 
 #### Task actions
 
 Several different types of actions are available for each task, based on the task's status, on the relation of the
-logged user to the task and on the user's rank. These actions are accessible from the task's details page and 
+logged user to the task and on the user's rank. These actions are accessible from the task's details page and
 from the mini-buttons in the task listing pages. Here's a breakdown of all possibilities:
 
 * __Edit__: available for task's author while the task is with "new" status. Thereafter, when status changes to
@@ -359,13 +359,13 @@ from the mini-buttons in the task listing pages. Here's a breakdown of all possi
 * __Accept task__: changes the task status to accepted. Only available to assignees for tasks with "new" status.
 * __Create subtask__: available for task's author while the task is with "new status". Thereafter, when status changes to
  "accepted" and beyond, this is only available to the assignees.
-* __Mark in progress__: changes the task status to "in progress". Only available to assignees and for tasks with 
+* __Mark in progress__: changes the task status to "in progress". Only available to assignees and for tasks with
   a status of "accepted" or "halted"
 * __Mark halted__: changes the task status to "halted". Only available to assignees for tasks marked as "in progress"
 * __Mark Completed__: changes the task status to "completed". Only available to assignees
-* __Mark Cancelled__: changes the task status to "cancelled". Available to authors while the task is still "new". 
+* __Mark Cancelled__: changes the task status to "cancelled". Available to authors while the task is still "new".
   Thereafter only available to assignees.
-* __Delete task__: only available to application admins. Non-reversible.  
+* __Delete task__: only available to application admins. Non-reversible.
 
 #### Uploading attachments
 
@@ -393,7 +393,7 @@ Editing a task is very much like creating a task: the form and layout is the sam
 
 The comments page gives a paginated list of all comments in reverse chronological order (newest on top). Useful
 for a quick overview and locating of all recent discussions that have taken place.
-Contains the following columns: 
+Contains the following columns:
 
 * User (comment author, links to the user's profile)
 * Date and time (of posting the comment)
@@ -449,7 +449,7 @@ Email notifications are automatically sent to users in the following situations:
   assignee: in thac case he won't receive an email, as the presumption is he's already aware of the assignment)
 * Assignees receive an email whenever a new comment is posted to a task they're assigned to
 * Task authors receive an email whenever the task status changes (unless the author is also among the task
-  assignees)  
+  assignees)
 
 ### The difference between staff accounts and public accounts
 

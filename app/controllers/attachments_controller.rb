@@ -2,14 +2,12 @@ class AttachmentsController < ApplicationController
 
   before_filter :confirm_enabled
   # before_filter :confirm_admin, :only => [:destroy]
-  
 
   def index
     @attachments = Attachment.all
 
     respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @attachments }
+      format.html
     end
   end
 
@@ -17,8 +15,7 @@ class AttachmentsController < ApplicationController
     @attachment = Attachment.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @attachment }
+      format.html
     end
   end
 
@@ -33,8 +30,7 @@ class AttachmentsController < ApplicationController
     @pagetitle = "Add attachment to task #{@task.name}"
 
     respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @attachment }
+      format.html
     end
   end
 
@@ -55,10 +51,8 @@ class AttachmentsController < ApplicationController
     respond_to do |format|
       if @attachment.save
         format.html { redirect_to task_path(@attachment.task), notice: 'Attachment was successfully created.' }
-        format.json { render json: @attachment, status: :created, location: @attachment }
       else
         format.html { render action: "new" }
-        format.json { render json: @attachment.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -69,10 +63,8 @@ class AttachmentsController < ApplicationController
     respond_to do |format|
       if @attachment.update_attributes(params[:attachment])
         format.html { redirect_to task_path(@attachment.task), notice: 'Attachment was successfully updated.' }
-        format.json { head :no_content }
       else
         format.html { render action: "edit" }
-        format.json { render json: @attachment.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -88,7 +80,6 @@ class AttachmentsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to task_path(@attachment.task), notice: 'Attachment was successfully deleted.' }
-      format.json { head :no_content }
     end
   end
 end

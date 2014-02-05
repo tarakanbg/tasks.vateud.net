@@ -18,6 +18,5 @@
 //= require bootstrap-datepicker
 //=  require 'raphael'
 //=  require 'morris'
-//=  require 'graphs'
 //= require_tree ./frontend
 

@@ -14,3 +14,5 @@
 /log/*.log
 /tmp
 /public/system
+/config/database.yml
+/config/initializers/mail.rb

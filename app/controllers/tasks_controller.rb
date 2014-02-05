@@ -2,7 +2,7 @@ class TasksController < ApplicationController
 
   before_filter :confirm_enabled, :except => [:forbidden, :rss, :rss_completed, :rss_comments]
   before_filter :confirm_admin, :only => [:destroy]
-  
+
   def index
     @user = current_user
     @filter = true
@@ -14,8 +14,7 @@ class TasksController < ApplicationController
     # @tasks = @tasks.paginate(:page => params[:page], :per_page => 25)
 
     respond_to do |format|
-      format.html 
-      format.json { render json: @tasks }
+      format.html
     end
   end
 
@@ -43,7 +42,7 @@ class TasksController < ApplicationController
     render "index"
   end
 
-  def show    
+  def show
     @task = Task.find(params[:id])
     if @task.private? && @task.author != current_user && current_user.staff == false
       flash[:error] = "Insufficient privileges! This Action is not available to you!"
@@ -60,8 +59,7 @@ class TasksController < ApplicationController
     # @versions = @versions.order('created_at DESC')
 
     respond_to do |format|
-      format.html # show.html.haml
-      format.json { render json: @task }
+      format.html
     end
   end
 
@@ -74,12 +72,11 @@ class TasksController < ApplicationController
     @task.parent_id = params[:parent_id] if params[:parent_id]
 
     respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @task }
+      format.html
     end
   end
 
-  def edit    
+  def edit
     @task = Task.find(params[:id])
     @pagetitle = "Edit Task: #{@task.name}"
     unless (@task.status_id > 1 && @task.users.include?(current_user)) or (@task.status_id == 1 &&  @task.author == current_user) or current_user.admin?
@@ -93,18 +90,16 @@ class TasksController < ApplicationController
 
     respond_to do |format|
       if @task.save
-        informed = []        
+        informed = []
         @task.users.each {|u| informed << u.id}
-        @task.informed = informed    
+        @task.informed = informed
         @task.save
         informed.delete(current_user.id)
-        Task.send_notifications(@task, informed) if informed && informed.count > 0  
+        Task.send_notifications(@task, informed) if informed && informed.count > 0
 
         format.html { redirect_to @task, notice: 'Task was successfully created.' }
-        format.json { render json: @task, status: :created, location: @task }
       else
         format.html { render action: "new" }
-        format.json { render json: @task.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -123,20 +118,19 @@ class TasksController < ApplicationController
           format.html { redirect_to new_attachment_path(:task => @task.id) , notice: 'Task was successfully updated.' }
         else
           @task.informed ? informed = @task.informed : informed = []
-          uninformed = []       
+          uninformed = []
           @task.users.each {|u| uninformed << u.id unless informed.include?(u.id)}
           if informed.count > 0
             merged = informed.zip(uninformed).flatten.compact
           else
             merged = uninformed
           end
-          @task.informed = merged 
+          @task.informed = merged
           @task.save
           uninformed.delete(current_user.id)
           Task.send_notifications(@task, uninformed) if uninformed && uninformed.count > 0
 
           format.html { redirect_to @task, notice: 'Task was successfully updated.' }
-          format.json { head :no_content }
         end
       else
         format.html { render action: "edit" }
@@ -151,7 +145,6 @@ class TasksController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to tasks_url }
-      format.json { head :no_content }
     end
   end
 
@@ -162,7 +155,7 @@ class TasksController < ApplicationController
       flash[:error] = "Insufficient privileges! This Action is not available to you!"
       return redirect_to "/forbidden"
     end
-    
+
     @task.due_date = Date.today if @task.due_date.past?
     @task.status_id = 2
     @task.save
@@ -257,14 +250,14 @@ class TasksController < ApplicationController
     end
   end
 
-  def rss    
+  def rss
     @tasks = Task.public.order('created_at DESC').limit(20)
     respond_to do |format|
        format.rss { render :layout => false }
     end
   end
 
-  def rss_completed    
+  def rss_completed
     @tasks = Task.public.inactive.order('updated_at DESC').limit(20)
     respond_to do |format|
        format.rss { render :layout => false }
@@ -277,12 +270,12 @@ class TasksController < ApplicationController
        format.rss { render :layout => false }
     end
   end
-  
-private  
- 
+
+private
+
   def email_author(task)
     unless task.users.include?(task.author)
       UserMailer.delay.author_status_email(task.id)
-    end 
+    end
   end
 end
