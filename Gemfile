@@ -46,6 +46,7 @@ gem "awesome_nested_set", "~> 2.1.6"
 gem "bootstrap-wysihtml5-rails", :git => 'git://github.com/tarakanbg/bootstrap-wysihtml5-rails.git'
 gem "paperclip", "~> 3.4.2"
 gem 'bootstrap-datepicker-rails'
+gem "bootstrap-multiselect-rails", "~> 0.0.2"
 
 gem 'newrelic_rpm'
 gem "ransack", "~> 0.7.2"

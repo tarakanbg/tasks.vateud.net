@@ -16,7 +16,6 @@
 //= require bootstrap-wysihtml5
 //= require bootstrap-wysihtml5/locales
 //= require bootstrap-datepicker
-//=  require 'raphael'
-//=  require 'morris'
+//= require bootstrap-multiselect
 //= require_tree ./frontend
 

@@ -11,6 +11,7 @@
  *= require_self
  *= require_tree ./frontend
  *= require bootstrap-wysihtml5
-  *= require bootstrap-datepicker
+ *= require bootstrap-datepicker
+ *= require bootstrap-multiselect
  */
 

@@ -3,13 +3,14 @@
   %head
     %title= "#{Settings.org} Tasks"
     <meta name="description" content="VATEUD Tasks Tracker" />
-    <meta name="keywords" content="VATSIM, VATEUD, flight, simulation, atc, PTD, ATO, pilot training" /> 
+    <meta name="keywords" content="VATSIM, VATEUD, flight, simulation, atc, PTD, ATO, pilot training" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     = stylesheet_link_tag "application", :media => "all"
     <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+
     = auto_discovery_link_tag(:rss, Settings.rss_new, {:title => "#{Settings.org} New Tasks"})
     = auto_discovery_link_tag(:rss, Settings.rss_completed, {:title => "#{Settings.org} Completed Tasks"})
     = auto_discovery_link_tag(:rss, Settings.rss_comments, {:title => "#{Settings.org} Latest Task Comments"})
@@ -18,19 +19,20 @@
   %body.pull_top
 
     = render :partial => "menu"
-        
+
     = render :partial => "flash", :locals => { :flash => flash }
     #aboutus
       .container
         .section_header
           %h3= @pagetitle
         .row
-          .span12.intro  
+          .span12.intro
             = yield
-    
+
 
     = render :partial => "footer"
     = javascript_include_tag "application"
+    <script type="text/javascript" src="http://cachedcommons.org/cache/jquery-jstree/1.0.0/javascripts/jquery-jstree-min.js"></script>
 
 
 
