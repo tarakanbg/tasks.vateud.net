@@ -19,7 +19,7 @@ class UserMailer < ActionMailer::Base
 
   def comment_assignees_email(comment_id, emails)
     @comment = Comment.find(comment_id)
-    @task = comment.task
+    @task = @comment.task
     mail(:to => emails, :subject => "#{Settings.org} Tasks: new comment posted on your task")
   end
 
@@ -28,6 +28,6 @@ class UserMailer < ActionMailer::Base
     mail(:to => emails, :subject => "#{Settings.org} Tasks: new user registration")
   end
 
-  
+
 end
 
