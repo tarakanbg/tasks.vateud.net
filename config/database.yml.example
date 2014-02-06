@@ -1,0 +1,23 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: db_name
+  pool: 5
+  host: localhost
+  username: user
+  password: pass
+
+test:
+  adapter: sqlite3
+  database: db/test.sqlite3
+  pool: 5
+  timeout: 5000
+
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: db_name
+  pool: 5
+  host: localhost
+  username: user
+  password: pass

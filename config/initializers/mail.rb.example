@@ -1,0 +1,11 @@
+# Mail settings go here. Rename to .rb
+
+ActionMailer::Base.smtp_settings = {
+  :address              => "smtp.gmail.com",
+  :port                 => 587,
+  :domain               => "domain.net",
+  :user_name            => "user@domain.net",
+  :password             => "password",
+  :authentication       => "plain",
+  :enable_starttls_auto => true
+}
