@@ -1,10 +1,8 @@
-# VATEUD Tasks and Workflow App
+# VATEUD tasks and workflow application: user guide
 
-__Live version__ at: [http://tasks.vateud.net](http://tasks.vateud.net)
+*by __Svilen Vassilev__*
 
 ___
-
-# User Guide
 
 ## General information
 
@@ -480,9 +478,3 @@ The application provides 3 public RSS feeds, no account or authentication requir
 * Latest comments
 
 The links to these feeds are available in the app footer.
-
-## Credits
-
-Copyright © 2014 [Svilen Vassilev](http://svilen.rubystudio.net)
-
-Released under the [GNU GPL LICENSE](https://github.com/tarakanbg/tasks.vateud.net/blob/master/LICENSE)
