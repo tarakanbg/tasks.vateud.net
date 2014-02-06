@@ -11,15 +11,16 @@ class Comment < ActiveRecord::Base
   attr_reader :private
 
   def private?
-    self.task.private? ? true : false    
+    self.task.private? ? true : false
   end
 
   def email_assignees
     recipients = self.task.users
-    # recipients.delete(self.user) if recipients.include?(self.user)
+    author_email = self.task.author.email
     emails = []
-    recipients.each {|u| emails << u.email}    
-    emails.delete(self.user.email) if recipients.include?(self.user)
+    emails << author_email
+    recipients.each {|u| emails << u.email}
+    emails.delete(self.user.email) if emails.include?(self.user.email)
     UserMailer.delay.comment_assignees_email(self.id, emails) if emails.count > 0
   end
 
