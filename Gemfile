@@ -52,5 +52,7 @@ gem 'newrelic_rpm'
 gem "ransack", "~> 0.7.2"
 gem "redcarpet", "~> 2.3.0"
 
-gem "sidekiq", "~> 2.17.4"
 gem "settingslogic", "~> 2.0.9"
+
+gem "delayed_job", "~> 4.0.0"
+gem "delayed_job_active_record", "~> 4.0.0"
