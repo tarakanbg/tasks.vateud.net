@@ -5,10 +5,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :name, :task_ids, :position,
                   :vatsimid, :vacc
-  # attr_accessible :title, :body
 
   has_paper_trail
 
@@ -20,7 +18,7 @@ class User < ActiveRecord::Base
   validates :vatsimid, :length => { :minimum => 6 }
   validates :vatsimid, :numericality => true
 
-  default_scope order('name ASC')
+  #default_scope order('name ASC')
 
   scope :staff, where(:staff => true)
   scope :nonstaff, where(:staff => false)
@@ -28,6 +26,7 @@ class User < ActiveRecord::Base
 
   attr_reader :name_position
   attr_reader :authored_tasks
+  attr_reader :deletable
 
   after_create :email_admins
 
@@ -44,5 +43,9 @@ class User < ActiveRecord::Base
 
   def authored_tasks
     Task.where(:author_id => self.id)
+  end
+
+  def deletable?
+    self.tasks.count == 0 && self.comments.count == 0 ? true : false
   end
 end

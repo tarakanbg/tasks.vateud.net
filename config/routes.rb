@@ -3,7 +3,7 @@ TasksVateudNet::Application.routes.draw do
   get "help" => 'users#help'
 
   devise_for :users
-  resources :users, :except => [:destroy, :new, :create]
+  resources :users, :except => [:new, :create]
   get 'tasks/my' => 'tasks#my'
   get 'tasks/archived' => 'tasks#archived'
   resources :tasks

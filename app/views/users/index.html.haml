@@ -1,8 +1,8 @@
-%table.users
+%table.users.table.table-striped.table-bordered.table-hover.table-condensed
   %tr
-    %th Name
-    %th E-mail
-    %th Enabled
+    %th= sort_link @search, :name, "Name"
+    -#%th E-mail
+    %th= sort_link @search, :enabled, "Enabled"
     %th Assigned tasks
     %th Active tasks
     %th Completed tasks
@@ -16,7 +16,7 @@
   - @users.each do |user|
     %tr
       %td= link_to user.name, user_path(user)
-      %td= user.email
+      -#%td= user.email
       %td= user.enabled
       %td= user.tasks.count
       %td= user.tasks.active.count      
@@ -33,7 +33,10 @@
             = link_to raw('<i class="icon-remove"></i>'), {:action => :disable, :id => user.id}, :method => :put, :confirm => "Are you sure you want to disable this user?", :title => "Disable User"
 
           - if user.staff == false
-            = link_to raw('<i class=" icon-circle-arrow-up"></i>'), {:action => :staff, :id => user.id}, :method => :put, :confirm => "Are you sure you want to promote this user to staff member?", :title => "Promote to staff"
+            = link_to raw('<i class="icon-circle-arrow-up"></i>'), {:action => :staff, :id => user.id}, :method => :put, :confirm => "Are you sure you want to promote this user to staff member?", :title => "Promote to staff"
           - if user.staff?
-            = link_to raw('<i class=" icon-circle-arrow-down"></i>'), {:action => :destaff, :id => user.id}, :method => :put, :confirm => "Are you sure you want to demote this user to regular member?", :title => "Demote from staff"
+            = link_to raw('<i class="icon-circle-arrow-down"></i>'), {:action => :destaff, :id => user.id}, :method => :put, :confirm => "Are you sure you want to demote this user to regular member?", :title => "Demote from staff"
+
+          - if user.deletable?
+            = link_to raw('<i class="icon-trash"></i>'), {:action => :destroy, :id => user.id}, :method => :delete, :confirm => "Are you sure you want to permanently remove this user?", :title => "Delete user"
 

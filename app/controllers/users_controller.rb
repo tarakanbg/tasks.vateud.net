@@ -5,10 +5,16 @@ class UsersController < ApplicationController
   def index
     if params[:staff] && params[:staff] == "true"
       @pagetitle = "Staff Users List"
-      @users = User.staff
+      @search = User.staff.search(params[:q])
+      @search.sorts = 'name asc' if @search.sorts.empty?
+      @users = @search.result(:distinct => true)
+      #@users = User.staff
     else
       @pagetitle = "Regular Users List"
-      @users = User.nonstaff
+      @search = User.nonstaff.search(params[:q])
+      @search.sorts = 'name asc' if @search.sorts.empty?
+      @users = @search.result(:distinct => true)
+      #@users = User.nonstaff
     end
 
     respond_to do |format|

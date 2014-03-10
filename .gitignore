@@ -16,3 +16,4 @@
 /public/system
 /config/database.yml
 /config/initializers/mail.rb
+/.idea
